@@ -155,3 +155,6 @@ dialog{background:#101521;color:#f1f4fb}
 
 /* v33: header is just the monogram. No bar, no border, no nav. */
 .header{background:transparent;border-bottom:0;justify-content:flex-start}
+
+/* v34: hero caption and film controls removed from view. Markup stays so hero.js keeps its handles. */
+.hero-top{display:none}
