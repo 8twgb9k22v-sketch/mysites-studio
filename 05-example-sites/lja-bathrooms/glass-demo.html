@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Liquid glass, one use</title>
+<link rel="icon" href="data:,">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;800&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="vendor/glass.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{min-height:100vh;font-family:"Archivo",system-ui,sans-serif;color:#fff;-webkit-font-smoothing:antialiased;
+  background:#0f1010 url("assets/wetroom-pale-stone.jpg") center/cover no-repeat fixed}
+.veil{position:fixed;inset:0;background:linear-gradient(180deg,rgba(15,16,16,.25),rgba(15,16,16,.6));pointer-events:none}
+.copy{position:relative;z-index:2;max-width:760px;padding:22vh 40px 40px}
+.label{font-family:"Geist Mono",monospace;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.7)}
+h1{font-weight:800;text-transform:uppercase;letter-spacing:-.02em;line-height:.95;font-size:clamp(34px,6vw,84px);margin-top:14px}
+p{color:rgba(255,255,255,.8);max-width:50ch;margin-top:16px;font-size:17px;line-height:1.5}
+#cta{position:relative;z-index:2;display:flex;gap:18px;align-items:center;padding:0 40px}
+#dock{position:fixed;left:50%;bottom:28px;transform:translateX(-50%);z-index:5}
+.glass-button{font-family:"Archivo",system-ui,sans-serif;font-weight:800}
+@media (max-width:700px){.copy{padding:16vh 20px 30px}#cta{padding:0 20px;flex-wrap:wrap}}
+</style>
+</head>
+<body>
+<div class="veil" aria-hidden="true"></div>
+<div class="copy">
+  <div class="label">liquid-glass-js over his photo</div>
+  <h1>Glass that refracts<br>the page behind it.</h1>
+  <p>Real WebGL refraction and blur sampled from the page, not a blurred box. The library snapshots the page with html2canvas and bends it through each glass shape.</p>
+</div>
+<div id="cta"></div>
+<div id="dock"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+<script src="vendor/container.js"></script>
+<script src="vendor/button.js"></script>
+<script>
+  // primary call, pill glass
+  const call = new Button({ text: 'Call 07365 513309', size: '26', type: 'pill' });
+  document.getElementById('cta').appendChild(call.element);
+  call.element.addEventListener('click', e => { if (!e.isTrusted) return; document.title = 'clicked: call'; location.href = 'tel:+447365513309'; });
+
+  // a glass dock with nested glass buttons (child glass samples the parent)
+  const dock = new Container({ borderRadius: 28, type: 'pill', tintOpacity: 0.18 });
+  const work = new Button({ text: 'Work', size: '20', type: 'pill' });
+  const wa = new Button({ text: 'WhatsApp', size: '20', type: 'pill' });
+  const txt = new Button({ text: 'Text', size: '20', type: 'pill' });
+  dock.addChild(work); dock.addChild(wa); dock.addChild(txt);
+  document.getElementById('dock').appendChild(dock.element);
+  wa.element.addEventListener('click', e => { if (!e.isTrusted) return; location.href = 'https://wa.me/447365513309'; });
+  txt.element.addEventListener('click', e => { if (!e.isTrusted) return; location.href = 'sms:+447365513309'; });
+</script>
+</body>
+</html>

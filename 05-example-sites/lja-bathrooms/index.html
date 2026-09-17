@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LJA Bathrooms, Plumbing and Bathrooms, Redhill</title>
+<meta name="description" content="Luke Andrews, plumber and bathroom fitter in Redhill. 9.98 out of 10 across 143 Checkatrade reviews. Showers, wet rooms, radiators, leaks. Call 07365 513309.">
+<!--
+  LJA Bathrooms spec site, v4. Reference-led remap, see brand/DESIGN.md (v4).
+  Mechanics replicated from measured behaviour on augen.pro (scroll-resolved hero image,
+  line-mask headline, header drop-in, fixed page-background theme flip, paragraph light-up)
+  and podium.global (fixed hero stage the page scrolls over, hover poster project list,
+  Lenis). Facts and quotes: brand/EVIDENCE.md.
+-->
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;800&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --canvas:#f3f3f1; --ink:#101212; --muted:#5d6363; --line:rgba(16,18,18,.16);
+  --accent:#2447b5; --on-accent:#ffffff;
+  --font:"Archivo",system-ui,sans-serif; --mono:"Geist Mono",ui-monospace,Menlo,monospace;
+  --max:1280px; --gutter:40px; --ease:cubic-bezier(.17,.67,.5,.98);
+}
+body.dark{--canvas:#0f1010; --ink:#f3f3f1; --muted:#9ba3a2; --line:rgba(243,243,241,.16); --accent:#5b82ff; --on-accent:#0f1010}
+*{margin:0;padding:0;box-sizing:border-box}
+html.lenis,html.lenis body{height:auto}
+.lenis.lenis-smooth{scroll-behavior:auto!important}
+body{color:var(--ink);font-family:var(--font);font-size:18px;line-height:1.5;-webkit-font-smoothing:antialiased;
+  overflow-x:clip;transition:color .6s ease}
+img,video{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--gutter)}
+.label{font-family:var(--mono);font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);transition:color .6s ease}
+.caps{font-weight:800;text-transform:uppercase;letter-spacing:-.02em;line-height:.95}
+
+/* ============ fixed page background (Augen page-background) ============ */
+.pagebg{position:fixed;inset:0;z-index:-2;background:#f3f3f1;transition:background .7s ease}
+body.dark .pagebg{background:#0f1010}
+
+/* ============ header: drops in, flips with theme ============ */
+.head{position:fixed;left:0;right:0;top:0;z-index:50;display:flex;justify-content:space-between;align-items:center;
+  padding:22px var(--gutter);opacity:0;transform:translateY(-50px);
+  animation:headIn .9s var(--ease) .4s forwards;color:#fff;mix-blend-mode:difference}
+@keyframes headIn{to{opacity:1;transform:none}}
+.head .wm{font-weight:800;text-transform:uppercase;letter-spacing:-.02em;font-size:15px}
+.head .label{color:rgba(255,255,255,.75)}
+.head .callpill{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;
+  border:1px solid rgba(255,255,255,.5);border-radius:999px;padding:8px 14px;transition:transform .3s var(--ease)}
+.head .callpill:hover{transform:translateY(-2px)}
+
+/* ============ hero: fixed stage, scroll-resolved (Augen), pinned bottom-left copy (Podium) ============ */
+.runway{height:240vh;position:relative}
+.stage{position:fixed;inset:0;z-index:0;overflow:hidden;background:#0f1010}
+.stage .media{position:absolute;inset:0;transform:scale(1.14);opacity:.18;filter:blur(22px);will-change:transform,opacity,filter}
+.stage .media video,.stage .media img{width:100%;height:100%;object-fit:cover}
+.stage .veil{position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,16,16,.15) 0%,rgba(15,16,16,0) 40%,rgba(15,16,16,.55) 100%)}
+.stage .copy{position:absolute;left:var(--gutter);right:var(--gutter);bottom:52px;color:#fff;z-index:2}
+.stage .copy .label{color:rgba(255,255,255,.7);margin-bottom:16px}
+.stage h1{font-size:clamp(40px,7.4vw,112px)}
+.stage h1 .l{display:block;overflow:hidden}
+.stage h1 .l span{display:block;transform:translateY(110%);transition:transform 1s var(--ease)}
+.stage h1 .l:nth-child(2) span{transition-delay:.1s}
+body.loaded .stage h1 .l span{transform:none}
+.stage .sub{margin-top:18px;max-width:46ch;color:rgba(255,255,255,.78);font-size:19px;opacity:0;transform:translateY(24px)}
+.stage .cta{margin-top:24px;display:flex;gap:12px;opacity:0;transform:translateY(24px);transition:opacity .8s var(--ease) .55s,transform .8s var(--ease) .55s}
+body.loaded .stage .cta{opacity:1;transform:none}
+.btn{display:inline-flex;align-items:center;height:50px;padding:0 22px;border-radius:999px;font-weight:500;font-size:16px;
+  transition:transform .3s var(--ease),background .25s ease,color .25s ease}
+.btn:hover{transform:translateY(-2px)}
+.btn.primary{background:var(--accent);color:var(--on-accent)}
+.btn.ghost{border:1px solid rgba(255,255,255,.45);color:#fff}
+.stage .cap{position:absolute;right:var(--gutter);bottom:52px;font-family:var(--mono);font-size:11px;letter-spacing:.1em;
+  text-transform:uppercase;color:rgba(255,255,255,.6);z-index:2}
+
+/* ============ content scrolls over the stage ============ */
+main{position:relative;z-index:2}
+.sec{padding:16vh 0}
+.statement h2{font-size:clamp(30px,4.6vw,66px);max-width:16ch}
+.lit{opacity:.4;transition:none}
+.statement p{margin-top:26px;max-width:58ch;font-size:19px;color:var(--muted);transition:color .6s ease}
+
+/* ============ jobs: Podium list with fixed hover poster ============ */
+.jobs{padding:10vh 0 14vh;border-top:1px solid var(--line)}
+.jobs .row{display:grid;grid-template-columns:70px 1fr auto;gap:24px;align-items:baseline;padding:22px 0;
+  border-bottom:1px solid var(--line);cursor:pointer;transition:opacity .3s ease}
+.jobs:hover .row{opacity:.45}
+.jobs .row:hover{opacity:1}
+.jobs .row .n{font-family:var(--mono);font-size:13px;color:var(--muted)}
+.jobs .row .t{font-weight:800;text-transform:uppercase;letter-spacing:-.02em;font-size:clamp(22px,3.4vw,48px);line-height:1}
+.jobs .row .m{font-family:var(--mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+.poster{position:fixed;z-index:40;left:50%;top:50%;width:min(46vw,640px);aspect-ratio:4/3;transform:translate(-50%,-50%) scale(1.015);
+  opacity:0;pointer-events:none;transition:opacity .35s ease,transform .5s var(--ease);border-radius:6px;overflow:hidden}
+.poster.on{opacity:1;transform:translate(-50%,-50%) scale(1)}
+.poster img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .25s ease}
+.poster img.on{opacity:1}
+.jobs .thumb{display:none}
+
+/* ============ record: dark flip ============ */
+.record{padding:18vh 0}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);margin-top:40px}
+.stat{padding:34px 22px 28px;border-bottom:1px solid var(--line);border-right:1px solid var(--line)}
+.stat:first-child{border-left:1px solid var(--line)}
+.stat b{display:block;font-weight:800;font-size:clamp(52px,7.6vw,120px);line-height:1;letter-spacing:-.04em;font-variant-numeric:tabular-nums}
+.stat span{display:block;margin-top:12px;color:var(--muted);transition:color .6s ease}
+.stat .src{margin-top:8px;font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;opacity:.8}
+
+/* ============ reviews ============ */
+.rev{margin-top:40px;border-top:1px solid var(--line)}
+.rev .row{display:grid;grid-template-columns:1fr 280px;gap:32px;padding:28px 0;border-bottom:1px solid var(--line);align-items:baseline}
+.rev q{quotes:"\201C" "\201D";font-size:clamp(19px,1.8vw,26px);line-height:1.35;font-weight:500}
+.rev .who{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);text-align:right;line-height:1.7}
+
+/* ============ contact ============ */
+.contact{padding:18vh 0 12vh}
+.contact h2{font-size:clamp(36px,6vw,96px);max-width:12ch}
+.contact .num{display:inline-block;margin-top:34px;font-family:var(--mono);font-size:clamp(28px,4.2vw,60px);font-variant-numeric:tabular-nums;
+  border-bottom:3px solid var(--accent);padding-bottom:6px;transition:color .25s ease,transform .3s var(--ease)}
+.contact .num:hover{color:var(--accent);transform:translateY(-2px)}
+.contact .routes{margin-top:30px;display:flex;gap:12px;flex-wrap:wrap}
+.contact .btn.ghost{border-color:var(--line);color:var(--ink)}
+.contact .cover{margin-top:30px;color:var(--muted);max-width:56ch}
+footer{border-top:1px solid var(--line);padding:28px 0 60px}
+footer .in{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;font-family:var(--mono);font-size:12px;
+  letter-spacing:.06em;text-transform:uppercase;color:var(--muted);line-height:2}
+
+/* ============ reveals (Augen title-reveal) ============ */
+.rv{display:block;overflow:hidden}
+.rv > span{display:block;transform:translateY(105%);transition:transform .9s var(--ease)}
+.rv.on > span{transform:none}
+.fade{opacity:0;transform:translateY(40px);transition:opacity .9s var(--ease),transform .9s var(--ease)}
+.fade.on{opacity:1;transform:none}
+
+/* ============ mobile ============ */
+@media (max-width:900px){
+  :root{--gutter:20px}
+  .runway{height:190vh}
+  .head .pn{display:none}
+  .head .label{display:none}
+  .stage .copy{bottom:36px}
+  .stage h1{font-size:clamp(38px,11vw,60px)}
+  .stage .cap{display:none}
+  .jobs .row{grid-template-columns:1fr;gap:8px;padding:18px 0}
+  .jobs .row .n{display:none}
+  .jobs .thumb{display:block;width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:6px;margin-top:10px}
+  .poster{display:none}
+  .stats{grid-template-columns:1fr 1fr}
+  .rev .row{grid-template-columns:1fr;gap:10px}
+  .rev .who{text-align:left}
+  .sec,.record,.contact{padding:64px 0}
+}
+
+/* ============ reduced motion ============ */
+@media (prefers-reduced-motion:reduce){
+  .head{animation:none;opacity:1;transform:none}
+  .stage{position:relative;height:100dvh}
+  .runway{height:auto}
+  .stage .media{transform:none;opacity:1;filter:none}
+  .stage h1 .l span,.rv > span{transform:none}
+  .stage .sub,.stage .cta,.fade{opacity:1;transform:none;transition:none}
+  .stage h1 .l span{transform:none;transition:none}
+  .lit{opacity:1}
+  .poster{transition:none}
+}
+</style>
+</head>
+<body>
+<div class="pagebg" id="pagebg" aria-hidden="true"></div>
+
+<header class="head">
+  <a class="wm" href="#top">LJA Bathrooms</a>
+  <span class="label">Redhill</span>
+  <a class="callpill" href="tel:+447365513309">Call<span class="pn"> 07365 513309</span></a>
+</header>
+
+<!-- ============ hero: fixed stage + runway ============ -->
+<div class="stage" id="stage" aria-label="LJA Bathrooms">
+  <div class="media" id="media">
+    <video id="heroVid" muted loop playsinline autoplay preload="auto" poster="assets/shower-front.png">
+      <source src="assets/shower-turn.mp4" type="video/mp4">
+    </video>
+  </div>
+  <div class="veil" aria-hidden="true"></div>
+  <div class="copy">
+    <p class="label">Plumber and bathroom fitter, Redhill</p>
+    <h1 class="caps" id="h1">
+      <span class="l"><span>The plumber</span></span>
+      <span class="l"><span>who answers.</span></span>
+    </h1>
+    <p class="sub" id="sub">Luke Andrews. No team, no sales call. Text, ring or WhatsApp, get a free quote, and he turns up. 143 people scored him afterwards.</p>
+    <div class="cta" id="cta">
+      <a class="btn primary" href="tel:+447365513309">Call 07365 513309</a>
+      <a class="btn ghost" href="https://wa.me/447365513309">WhatsApp</a>
+    </div>
+  </div>
+  <span class="cap">Illustration: chrome rainfall shower</span>
+</div>
+<div class="runway" id="runway"></div>
+
+<main id="top">
+
+  <!-- ============ statement ============ -->
+  <section class="sec statement">
+    <div class="wrap">
+      <h2 class="caps"><span class="rv"><span>One plumber.</span></span><span class="rv"><span>143 people</span></span><span class="rv"><span>scored him.</span></span></h2>
+      <p class="lit">Luke Andrews has fixed plumbing and fitted bathrooms around Redhill for over six years. The man who quotes the job is the man who turns up, and the reviews keep saying the same thing about him: he was quick.</p>
+      <p class="lit">Free quotation first. Cards accepted. Domestic and commercial. Insurance work. Twenty-four hour call-out for the nights something bursts.</p>
+    </div>
+  </section>
+
+  <!-- ============ jobs: hover poster list ============ -->
+  <section class="jobs" id="work">
+    <div class="wrap">
+      <p class="label fade">Recent work, photographed by the man who fitted it</p>
+      <div id="rows">
+        <a class="row" href="#contact" data-img="assets/shower-grey-sliding.jpg"><span class="n">01</span><span class="t">Shower room</span><span class="m">Grey stone, slate floor, RH1</span><img class="thumb" src="assets/shower-grey-sliding.jpg" alt="Grey stone-effect tiled shower enclosure with sliding screen" loading="lazy"></a>
+        <a class="row" href="#contact" data-img="assets/ensuite-chrome-rail.jpg"><span class="n">02</span><span class="t">Ensuite</span><span class="m">Chrome rail, dark vanity</span><img class="thumb" src="assets/ensuite-chrome-rail.jpg" alt="Ensuite with chrome ladder radiator and dark wood vanity" loading="lazy"></a>
+        <a class="row" href="#contact" data-img="assets/wetroom-pale-stone.jpg"><span class="n">03</span><span class="t">Wet room</span><span class="m">Pale stone, rainfall head</span><img class="thumb" src="assets/wetroom-pale-stone.jpg" alt="Wet room in pale stone tile with rainfall shower" loading="lazy"></a>
+        <a class="row" href="#contact" data-img="assets/walkin-chrome-rail.jpg"><span class="n">04</span><span class="t">Walk-in shower</span><span class="m">Chrome rail, level floor</span><img class="thumb" src="assets/walkin-chrome-rail.jpg" alt="Walk-in shower with chrome rail and towel radiator" loading="lazy"></a>
+      </div>
+    </div>
+  </section>
+  <div class="poster" id="poster" aria-hidden="true">
+    <img src="assets/shower-grey-sliding.jpg" alt="">
+    <img src="assets/ensuite-chrome-rail.jpg" alt="">
+    <img src="assets/wetroom-pale-stone.jpg" alt="">
+    <img src="assets/walkin-chrome-rail.jpg" alt="">
+  </div>
+
+  <!-- ============ record: dark flip ============ -->
+  <section class="record" id="record" data-theme="dark">
+    <div class="wrap">
+      <p class="label fade">The record</p>
+      <h2 class="caps" style="font-size:clamp(30px,4.6vw,66px);max-width:16ch"><span class="rv"><span>You do not have to</span></span><span class="rv"><span>take his word for it.</span></span></h2>
+      <div class="stats">
+        <div class="stat fade"><b>9.98</b><span>out of 10</span><span class="src">Checkatrade, Sept 2026</span></div>
+        <div class="stat fade"><b>143</b><span>reviews to date</span><span class="src">Checkatrade, Sept 2026</span></div>
+        <div class="stat fade"><b>14</b><span>in the last twelve months</span><span class="src">Checkatrade, Sept 2026</span></div>
+        <div class="stat fade"><b>6+</b><span>years in the trade</span><span class="src">His profile, "over 6 years"</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ reviews ============ -->
+  <section class="sec" id="reviews">
+    <div class="wrap">
+      <p class="label fade">What people wrote afterwards</p>
+      <div class="rev">
+        <div class="row fade"><q>Luke was quick to respond and came around at short notice. He did a great job fixing my leaking sink and loose tap.</q><div class="who">Tap repair, RH1<br>December 2025</div></div>
+        <div class="row fade"><q>I couldn't have asked for a more honest, trustworthy and professional plumber.</q><div class="who">General plumbing, RH17<br>December 2025</div></div>
+        <div class="row fade"><q>Very quick to respond and came out to do the job the next day.</q><div class="who">Radiator installation, RH6<br>November 2025</div></div>
+        <div class="row fade"><q>They were so clean, tidy and polite. The new toilet looks great.</q><div class="who">Bathroom plumbing, KT5<br>November 2025</div></div>
+        <div class="row fade"><q>He was professional, tidy, and the finish looks excellent.</q><div class="who">Shower tray and screen, RH1<br>November 2025</div></div>
+      </div>
+      <p class="label" style="margin-top:22px">Verbatim from his public Checkatrade profile, September 2026</p>
+    </div>
+  </section>
+
+  <!-- ============ contact ============ -->
+  <section class="contact" id="contact">
+    <div class="wrap">
+      <p class="label fade">Tell him what is leaking</p>
+      <h2 class="caps"><span class="rv"><span>One number.</span></span><span class="rv"><span>He picks up.</span></span></h2>
+      <a class="num fade" href="tel:+447365513309" aria-label="Call 07365 513309">07365 513309</a>
+      <div class="routes fade">
+        <a class="btn primary" href="tel:+447365513309">Call</a>
+        <a class="btn ghost" href="https://wa.me/447365513309">WhatsApp</a>
+        <a class="btn ghost" href="sms:+447365513309">Text</a>
+      </div>
+      <p class="cover fade">Redhill, Horley, Haywards Heath and out to Surbiton. If you are outside these, ring anyway.
+      He will tell you straight whether it is worth his drive. Free quotation first, then the job.</p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap in">
+      <div>LJA Bathrooms<br>Luke Andrews, sole trader<br>Redhill</div>
+      <div style="text-align:right">Instagram: ljabathrooms<br>Reviewed jobs RH1 RH6 RH17 KT5<br>Figures sourced Checkatrade, September 2026</div>
+    </div>
+  </footer>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
+<script>
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  window.addEventListener('load', function(){ setTimeout(function(){ document.body.classList.add('loaded'); }, 500); });
+  if (document.readyState === 'complete') setTimeout(function(){ document.body.classList.add('loaded'); }, 500);
+
+  /* keep the hero video playing while on screen */
+  var vid = document.getElementById('heroVid');
+  var play = function(){ var p = vid.play(); if (p && p.catch) p.catch(function(){}); };
+  document.addEventListener('visibilitychange', function(){ if (!document.hidden) play(); });
+
+  /* hover posters (Podium project-list-hover-poster) */
+  var poster = document.getElementById('poster'), pimgs = poster.querySelectorAll('img');
+  document.querySelectorAll('#rows .row').forEach(function(row, i){
+    row.addEventListener('mouseenter', function(){ pimgs.forEach(function(im, k){ im.classList.toggle('on', k === i); }); poster.classList.add('on'); });
+    row.addEventListener('mouseleave', function(){ poster.classList.remove('on'); });
+  });
+
+  /* reveals */
+  var io = new IntersectionObserver(function(es){ es.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add('on'); io.unobserve(e.target); } }); }, {threshold:.2});
+  document.querySelectorAll('.rv, .fade').forEach(function(el){ io.observe(el); });
+
+  if (reduce || !window.gsap) { document.querySelectorAll('.lit').forEach(function(p){ p.style.opacity = 1; }); return; }
+  gsap.registerPlugin(ScrollTrigger);
+
+  /* Lenis wired to ScrollTrigger */
+  var lenis = new Lenis({ lerp: .09, smoothWheel: true });
+  lenis.on('scroll', ScrollTrigger.update);
+  gsap.ticker.add(function(t){ lenis.raf(t * 1000); });
+  gsap.ticker.lagSmoothing(0);
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){
+    a.addEventListener('click', function(ev){ var el = document.querySelector(a.getAttribute('href')); if (!el) return; ev.preventDefault(); lenis.scrollTo(el); });
+  });
+
+  /* hero: scroll-resolved media (Augen), lines out of masks, then the stage lets go */
+  var tl = gsap.timeline({ scrollTrigger:{ trigger:'#runway', start:'top top', end:'bottom bottom', scrub:.8 } });
+  tl.to('#media', { scale:1, opacity:1, filter:'blur(0px)', ease:'none', duration:.6 }, 0)
+    .to('#sub', { opacity:1, y:0, ease:'power2.out', duration:.22 }, .18)
+    .to('#stage', { opacity:0, ease:'none', duration:.14 }, .86);
+  ScrollTrigger.create({ trigger:'#runway', start:'bottom bottom', onEnter:function(){ document.getElementById('stage').style.visibility='hidden'; vid.pause(); },
+    onLeaveBack:function(){ document.getElementById('stage').style.visibility='visible'; play(); } });
+
+  /* paragraphs light up as they cross the middle of the viewport */
+  document.querySelectorAll('.lit').forEach(function(p){
+    gsap.fromTo(p, {opacity:.4}, {opacity:1, ease:'none', scrollTrigger:{ trigger:p, start:'top 85%', end:'top 45%', scrub:true }});
+  });
+
+  /* theme flip: fixed page background tweens dark for the record section (Augen off-white / off-black) */
+  var pagebg = document.getElementById('pagebg');
+  document.querySelectorAll('[data-theme="dark"]').forEach(function(sec){
+    var toDark = function(){ document.body.classList.add('dark'); };
+    var toLight = function(){ document.body.classList.remove('dark'); };
+    ScrollTrigger.create({ trigger:sec, start:'top 60%', end:'bottom 40%', onEnter:toDark, onEnterBack:toDark, onLeave:toLight, onLeaveBack:toLight });
+  });
+})();
+</script>
+</body>
+</html>
