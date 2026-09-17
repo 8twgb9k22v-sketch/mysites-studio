@@ -145,3 +145,10 @@ dialog{background:#101521;color:#f1f4fb}
 @media(prefers-reduced-motion:reduce){
   .nav-contact,.filters button,.scene-tools button,.experiment>button,.brand-ident button,.contact-button,.save-brief{transition:none;transform:none!important}
 }
+
+/* v32: chrome monogram from the fast montage replaces the header wordmark. */
+.header .brand-mark{display:flex;align-items:center;height:100%}
+.header .brand-mark img{height:62px;width:auto;display:block;transition:transform .3s var(--ease)}
+.header .brand-mark:hover img{transform:translateY(-1px) scale(1.03)}
+@media(max-width:520px){.header .brand-mark img{height:50px}}
+@media(prefers-reduced-motion:reduce){.header .brand-mark img{transition:none;transform:none!important}}
