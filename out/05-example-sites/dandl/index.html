@@ -1,0 +1,1197 @@
+<!doctype html>
+<html lang="en-GB" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>D &amp; L Heating Ltd, Specialist Gas Engineers, Ash Hampshire</title>
+<meta name="description" content="Family plumbing, heating and gas engineers in Ash, Hampshire. Established 1985, three generations. 9.92 out of 10 across 199 Checkatrade reviews. Call 07723 954405.">
+<!--
+  D & L Heating Ltd spec site, v2.1.
+  Structure, motion and effects follow the reference site bpco.kr at Massi's direction:
+  light-locked silver ground, fixed blend-difference HUD, dashed pill nav, loading
+  curtain, ScrollSmoother inertial scroll, idle-spinning scroll-scrubbed 3D cube,
+  giant embossed white words, outlined horizontal-pan work list with accent fill,
+  spec plates, flicker hover, Rock Salt handwritten asides.
+  Colour, type and copy come from brand/DESIGN.md, brand/tokens.css, brand/BRAND.md.
+  The motion override is documented in brand/DESIGN.md.
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Source+Sans+3:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Rock+Salt&display=swap" rel="stylesheet">
+<style>
+/* ============ tokens (brand/tokens.css, light locked like the reference) ============ */
+:root{
+  --canvas:#f4f2ef; --band:#ece9e4; --ink:#141419; --muted:#5b5a66;
+  --line:#dcd8d1; --accent:#3c3a66; --on-accent:#ffffff;
+  --grad-a:#e7e4df; --grad-b:#f5f4f1; --grad-c:#e4e1db;
+  --emboss:#ffffff;
+  --font-display:"Playfair Display",Georgia,serif;
+  --font-body:"Source Sans 3",system-ui,-apple-system,sans-serif;
+  --font-mono:"Geist Mono",ui-monospace,"SF Mono",Menlo,monospace;
+  --font-hand:"Rock Salt",cursive;
+  --max:1160px; --gutter:40px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{color-scheme:light}
+body{
+  background:var(--canvas);
+  color:var(--ink);
+  font-family:var(--font-body);
+  font-size:17px;line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:clip;
+}
+body::before{
+  content:"";position:fixed;inset:0;z-index:-1;
+  background:linear-gradient(0deg,rgba(255,255,255,.3),rgba(255,255,255,.3)),
+             linear-gradient(var(--grad-a),var(--grad-b) 79%,var(--grad-c));
+}
+img{max-width:100%;display:block}
+a{color:var(--accent);text-decoration:none}
+.mono{font-family:var(--font-mono);font-variant-numeric:tabular-nums}
+.hand{font-family:var(--font-hand);font-size:15px;line-height:1.7;color:var(--muted);
+  letter-spacing:-.02em;transform:rotate(-2deg)}
+
+/* ============ background components (floating depth layer) ============ */
+.bgfx{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+#smooth-wrapper{position:relative;z-index:1}
+@keyframes orbfloat{
+  from{transform:translateY(0) translateX(0)}
+  to{transform:translateY(-26px) translateX(10px)}
+}
+.ring{
+  position:absolute;border-radius:50%;border:1px dashed var(--ink);opacity:.08;
+  animation:ringspin 60s linear infinite;
+}
+.ring.r1{width:340px;height:340px;right:-60px;top:12vh}
+.ring.r2{width:190px;height:190px;left:-40px;bottom:20vh;animation-duration:45s;
+  animation-direction:reverse;opacity:.06}
+@keyframes ringspin{to{transform:rotate(1turn)}}
+.plus{
+  position:absolute;font-family:var(--font-mono);font-size:18px;color:var(--ink);
+  opacity:.12;animation:orbfloat 10s ease-in-out infinite alternate;
+}
+.plus.p1{left:14vw;top:56vh;animation-delay:1.4s}
+.plus.p2{right:24vw;top:14vh;animation-delay:.5s}
+.plus.p3{right:7vw;bottom:26vh;animation-delay:2.8s;font-size:13px}
+
+/* ============ black loader (bpco loading_section) ============ */
+.loader{
+  position:fixed;inset:0;z-index:300;background:#0b0b0e;color:#fff;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;
+  padding-bottom:50px;
+  transition:transform .85s cubic-bezier(.76,0,.24,1);
+}
+.loader .msg{font-family:var(--font-mono);font-size:16px;letter-spacing:.06em;
+  text-transform:uppercase}
+.loader .bar{
+  width:min(670px,80vw);height:20px;border:1px solid #fff;border-radius:20px;
+  overflow:hidden;
+}
+.loader .fill{
+  width:0;height:100%;border-radius:20px;background:#fff;
+  box-shadow:0 0 20px 0 #fff;
+  display:flex;align-items:center;transition:width .2s ease;
+}
+.loader .fill::after{
+  content:"";height:1px;width:100%;border-top:1px dashed #121212;
+}
+.loader .introline{
+  position:absolute;bottom:22px;left:50%;transform:translateX(-50%);
+  width:min(770px,88vw);text-align:center;
+  font-family:var(--font-mono);font-size:12px;line-height:1.6;
+  letter-spacing:.08em;text-transform:uppercase;color:#c5c5c5;
+}
+.lifted .loader{transform:translateY(-100%)}
+.underveil{
+  position:fixed;inset:0;z-index:290;
+  background:linear-gradient(0deg,rgba(255,255,255,.3),rgba(255,255,255,.3)),
+             linear-gradient(var(--grad-a),var(--grad-b) 79%,var(--grad-c));
+  transition:transform .85s cubic-bezier(.76,0,.24,1) .12s;
+}
+.lifted .underveil{transform:translateY(-100%)}
+
+/* ============ top fade: content dissolves before it reaches the HUD ============ */
+.topfade{
+  position:fixed;left:0;right:0;top:0;height:150px;z-index:90;pointer-events:none;
+  background:linear-gradient(to bottom,
+    rgba(238,236,232,1) 0%,rgba(238,236,232,.96) 38%,
+    rgba(238,236,232,.55) 68%,rgba(238,236,232,0) 100%);
+}
+
+/* ============ fixed HUD ============ */
+.hud{
+  position:fixed;left:28px;right:28px;top:24px;z-index:100;
+  display:grid;grid-template-columns:auto auto 21% auto auto;
+  justify-content:space-between;align-items:start;
+  font-family:var(--font-mono);font-size:12px;line-height:1.5;
+  letter-spacing:.02em;text-transform:uppercase;
+  color:rgb(225,225,225);mix-blend-mode:difference;
+  pointer-events:none;user-select:none;
+}
+.hud .brand{font-family:var(--font-display);font-weight:700;font-size:15px;
+  letter-spacing:.04em;text-transform:uppercase;line-height:1.2}
+.hud .sub{font-family:var(--font-mono);font-size:11px;margin-top:3px;text-transform:uppercase}
+.hud .right{text-align:right}
+
+/* ============ pill nav ============ */
+.pillnav{
+  position:fixed;left:50%;top:18px;transform:translateX(-50%);z-index:110;
+  width:248px;height:40px;display:flex;align-items:center;justify-content:center;gap:22px;
+  font-family:var(--font-mono);font-size:12.5px;letter-spacing:.04em;
+  border:1px dashed var(--ink);border-radius:40px;
+  background:rgba(255,255,255,.4);
+  -webkit-backdrop-filter:blur(7px);backdrop-filter:blur(7px);
+}
+.pillnav a{color:var(--ink);position:relative;z-index:2;padding:6px 2px;cursor:pointer;
+  transition:color .18s ease,transform .15s ease}
+.pillnav a:active{transform:scale(.94)}
+.pillnav .puck{
+  position:absolute;z-index:1;top:5px;height:28px;border-radius:28px;
+  background:var(--accent);left:50%;width:0;opacity:0;
+  transition:left .22s ease,width .22s ease,opacity .22s ease;
+}
+.pillnav a:hover{color:var(--on-accent)}
+.pillnav a.n1:hover~.puck{left:8px;width:62px;opacity:1}
+.pillnav a.n2:hover~.puck{left:78px;width:66px;opacity:1}
+.pillnav a.n3:hover~.puck{left:152px;width:88px;opacity:1}
+
+/* ============ scroll cue (bpco dot chevron) ============ */
+.scrollcue{
+  position:fixed;bottom:30px;left:50%;transform:translateX(-50%);z-index:60;
+  display:flex;flex-direction:column;align-items:center;gap:12px;
+  font-family:var(--font-mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase;
+  color:rgb(197,197,197);mix-blend-mode:difference;transition:opacity .4s ease;
+}
+.scrollcue .dots{position:relative;width:45px;height:15px}
+.scrollcue .dots i{position:absolute;width:5px;height:5px;background:rgb(197,197,197);opacity:0;
+  animation:dotfall 1.6s infinite}
+.scrollcue .dots i:nth-child(1){top:0;left:0}
+.scrollcue .dots i:nth-child(2){top:0;left:20px;animation-delay:.1s}
+.scrollcue .dots i:nth-child(3){top:0;left:40px;animation-delay:.2s}
+.scrollcue .dots i:nth-child(4){top:5px;left:5px;animation-delay:.3s}
+.scrollcue .dots i:nth-child(5){top:5px;left:15px;animation-delay:.4s}
+.scrollcue .dots i:nth-child(6){top:5px;left:25px;animation-delay:.5s}
+.scrollcue .dots i:nth-child(7){top:5px;left:35px;animation-delay:.6s}
+.scrollcue .dots i:nth-child(8){top:10px;left:10px;animation-delay:.7s}
+.scrollcue .dots i:nth-child(9){top:10px;left:30px;animation-delay:.8s}
+.scrollcue .dots i:nth-child(10){top:10px;left:20px;animation-delay:.9s}
+@keyframes dotfall{0%,100%{opacity:0}40%{opacity:1}}
+.scrolled .scrollcue{opacity:0;pointer-events:none}
+
+/* ============ mobile call bar ============ */
+.callbar{
+  position:fixed;left:16px;right:16px;bottom:14px;z-index:120;display:none;
+  height:52px;border-radius:999px;background:var(--accent);color:var(--on-accent);
+  font-family:var(--font-mono);font-size:15px;letter-spacing:.03em;
+  align-items:center;justify-content:center;
+  padding-bottom:env(safe-area-inset-bottom,0);
+  transform:translateY(90px);transition:transform .35s ease;
+}
+.callbar:hover{filter:brightness(1.12)}
+.callbar:active{transform:translateY(1px)}
+.scrolled .callbar{transform:translateY(0)}
+
+/* ============ stage ============ */
+.runway{height:340vh;position:relative}
+.stage{
+  height:100dvh;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+}
+.intro{
+  position:absolute;z-index:5;left:50%;top:44%;transform:translate(-50%,-50%);
+  text-align:center;width:min(92vw,880px);
+}
+.intro .eyebrow{
+  font-family:var(--font-mono);font-size:12px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--muted);margin-bottom:22px;
+}
+.intro h1{
+  font-family:var(--font-display);font-weight:700;
+  font-size:clamp(40px,7vw,88px);line-height:1.02;letter-spacing:.01em;
+  text-transform:uppercase;
+}
+.intro .score{margin-top:26px;font-family:var(--font-mono);font-size:15px;color:var(--muted)}
+.intro .score b{color:var(--ink);font-weight:500;font-size:22px}
+.cubewrap{position:absolute;inset:0;z-index:1}
+.cube{position:relative;width:100%;height:100%}
+.cube video{
+  width:100%;height:100%;object-fit:cover;display:block;
+  -webkit-mask-image:linear-gradient(180deg,transparent 1%,#000 24%),
+    linear-gradient(90deg,transparent 0,#000 14%,#000 86%,transparent 100%);
+  -webkit-mask-composite:source-in;
+  mask-image:linear-gradient(180deg,transparent 1%,#000 24%),
+    linear-gradient(90deg,transparent 0,#000 14%,#000 86%,transparent 100%);
+  mask-composite:intersect;
+}
+.specplate{
+  position:absolute;z-index:6;left:28px;bottom:28px;width:316px;
+  border:1px solid #fff;color:#fff;
+  font-family:var(--font-mono);font-size:12px;letter-spacing:.02em;text-transform:uppercase;
+  background:rgba(15,15,18,.38);
+  -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
+  text-shadow:0 1px 2px rgba(10,10,14,.4);
+}
+.specplate .head{display:flex;border-bottom:1px solid #fff;height:36px}
+.specplate .head .t{flex:1;display:flex;align-items:center;padding-left:14px}
+.specplate .head .n{width:64px;border-left:1px solid #fff;display:flex;
+  align-items:center;justify-content:center;font-weight:500}
+.specplate .bodycell{padding:10px 14px;line-height:1.7}
+.stagecap{
+  position:absolute;z-index:6;right:28px;bottom:28px;text-align:right;
+  font-family:var(--font-mono);font-size:12px;letter-spacing:.04em;
+  text-transform:uppercase;color:#f6f4f0;line-height:1.8;
+  text-shadow:0 1px 3px rgba(10,10,14,.45);
+}
+.stagecap .hand{color:#efece7;text-shadow:0 1px 3px rgba(10,10,14,.45)}
+.stagecap .hand{display:block;margin-top:8px;text-transform:none;text-align:right}
+
+/* ============ shared chrome ============ */
+.wrap{max-width:var(--max);margin:0 auto;padding:0 var(--gutter)}
+.sec{padding:88px 0;position:relative}
+.sec.band{background:var(--band)}
+.seclabel{font-family:var(--font-mono);font-size:12px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--muted);margin-bottom:18px}
+h2{font-size:clamp(27px,3.4vw,34px);font-weight:600;line-height:1.15;letter-spacing:-.01em}
+
+/* ============ principles: bpco m2 embossed rows ============ */
+.prinrow{
+  min-height:76vh;display:flex;flex-direction:column;justify-content:center;
+  gap:6vh;position:relative;overflow:clip;padding:7vh 0 5vh;
+}
+.prinrow .emboss{
+  position:absolute;z-index:0;left:50%;top:44%;transform:translate(-50%,-50%);
+  font-size:15vw;line-height:1;font-weight:600;letter-spacing:-.04em;
+  color:var(--emboss);white-space:nowrap;user-select:none;pointer-events:none;
+}
+.prinrow .emboss i{
+  display:inline-block;font-style:normal;opacity:0;transform:translateY(60%);
+  transition:transform .9s cubic-bezier(.16,1,.3,1),opacity .7s ease;
+  transition-delay:calc(var(--i) * 55ms);
+}
+.prinrow.inview .emboss i{opacity:1;transform:none}
+.lmask{display:block;overflow:hidden}
+.lmask > span{display:block;transform:translateY(110%);
+  transition:transform .8s cubic-bezier(.16,1,.3,1) .1s}
+.prinrow.inview .lmask > span{transform:none}
+.prinrow .inner{
+  position:relative;z-index:1;width:100%;max-width:var(--max);margin:0 auto;
+  padding:0 var(--gutter);
+  display:grid;grid-template-columns:110px 1fr 1.1fr;gap:40px;align-items:center;
+}
+.prinrow .num{font-family:var(--font-mono);font-size:15px;color:var(--muted)}
+.prinrow .lead{font-size:clamp(21px,2.2vw,26px);font-weight:600;line-height:1.3;max-width:20ch}
+.prinrow .desc p{color:var(--ink);max-width:52ch}
+.prinrow .desc blockquote{
+  margin-top:18px;padding-left:16px;border-left:1px solid var(--line);
+  font-size:17px;color:var(--ink);
+}
+.prinrow .desc cite{display:block;margin-top:8px;font-style:normal;
+  font-family:var(--font-mono);font-size:12px;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--muted)}
+.prinrow .hand{position:absolute;z-index:1;right:8vw;top:12vh}
+.prinrow.pr3 .hand{top:auto;bottom:26vh;right:12vw}
+
+/* glyph-field numeral, left column (reference: massi's 1080x1080 matrix video) */
+.glyphfield{
+  position:absolute;z-index:0;left:0;top:6%;bottom:6%;width:30vw;
+  pointer-events:none;opacity:0;transition:opacity 1.2s ease .3s;
+}
+.prinrow.inview .glyphfield{opacity:1}
+.glyphfield canvas{width:100%;height:100%;display:block}
+
+/* fact strip anchoring the bottom of each row */
+.prinfacts{
+  position:relative;z-index:1;width:100%;max-width:var(--max);margin:0 auto;
+  padding:0 var(--gutter);
+}
+.prinfacts .cells{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  border-top:1px solid var(--ink);
+}
+.prinfacts .cell{
+  padding:16px 18px 18px;border-right:1px solid var(--ink);
+  opacity:0;transform:translateY(18px);
+  transition:opacity .7s ease,transform .35s cubic-bezier(.16,1,.3,1),background .3s ease;
+}
+.prinrow.inview .prinfacts .cell:hover{transform:translateY(-3px);background:rgba(255,255,255,.6)}
+.prinfacts .cell:first-child{border-left:1px solid var(--ink)}
+.prinrow.inview .prinfacts .cell{opacity:1;transform:none}
+.prinrow.inview .prinfacts .cell:nth-child(2){transition-delay:.12s}
+.prinrow.inview .prinfacts .cell:nth-child(3){transition-delay:.24s}
+.prinrow.inview .prinfacts .cell:nth-child(4){transition-delay:.36s}
+.prinrow.inview .prinfacts .cell:nth-child(5){transition-delay:.48s}
+.prinfacts .k{font-family:var(--font-mono);font-size:11px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--muted)}
+.prinfacts .v{margin-top:6px;font-weight:600;font-size:16px;line-height:1.35}
+/* timeline variant: five cells */
+.prinfacts.timeline .cells{grid-template-columns:repeat(5,1fr)}
+.prinfacts.timeline .v{font-family:var(--font-mono);font-variant-numeric:tabular-nums;
+  font-weight:500;font-size:clamp(17px,1.6vw,21px)}
+.prinfacts.timeline .k{margin-top:6px}
+.prinfacts.timeline .cell{display:flex;flex-direction:column-reverse}
+
+/* ============ sparkles ============ */
+.sparkle{position:absolute;width:26px;height:26px;color:var(--accent);opacity:.55;
+  animation:twinkle 2.8s ease-in-out infinite}
+.sparkle.s2{width:16px;height:16px;animation-delay:1.4s}
+@keyframes twinkle{0%,100%{transform:scale(.7);opacity:.25}50%{transform:scale(1);opacity:.6}}
+
+/* ============ zoom stage: viewfinder -> full bleed -> release ============ */
+.zoomrun{height:320vh;position:relative}
+.zoomstage{
+  height:100dvh;overflow:hidden;position:relative;background:var(--band);
+  display:flex;align-items:center;justify-content:center;
+}
+.zfig{position:absolute;inset:0;margin:0;transform-origin:50% 50%;will-change:transform}
+.zfig img{width:100%;height:100%;object-fit:cover}
+.zvig{position:absolute;inset:0;z-index:2;pointer-events:none;opacity:0;
+  background:radial-gradient(ellipse at 50% 50%,transparent 34%,rgba(10,10,14,.92) 100%)}
+.zgrain{position:absolute;inset:0;z-index:3;pointer-events:none;opacity:.14;mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 .6 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+.zframe{position:absolute;z-index:4;left:50%;top:50%;width:min(36vw,520px);aspect-ratio:4/3;
+  transform:translate(-50%,-50%);pointer-events:none}
+.zframe i{position:absolute;width:26px;height:26px;border:0 solid var(--ink)}
+.zframe .c1{left:-8px;top:-8px;border-left-width:1.5px;border-top-width:1.5px}
+.zframe .c2{right:-8px;top:-8px;border-right-width:1.5px;border-top-width:1.5px}
+.zframe .c3{left:-8px;bottom:-8px;border-left-width:1.5px;border-bottom-width:1.5px}
+.zframe .c4{right:-8px;bottom:-8px;border-right-width:1.5px;border-bottom-width:1.5px}
+.zmeta{position:absolute;z-index:5;font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;
+  text-transform:uppercase;color:var(--ink);transition:color .4s ease}
+.zmeta.zm1{left:32px;top:96px}
+.zmeta.zm2{right:32px;top:96px;text-align:right}
+.zmeta.zm3{left:32px;bottom:32px}
+.zoomed .zmeta{color:#f4f2ef;text-shadow:0 1px 3px rgba(10,10,14,.5)}
+.zcap{position:absolute;z-index:5;left:50%;top:50%;transform:translate(-50%,-50%);
+  text-align:center;color:#fff;font-weight:600;font-size:clamp(32px,5.4vw,78px);
+  line-height:1.05;letter-spacing:-.02em;text-shadow:0 2px 24px rgba(10,10,14,.35);
+  pointer-events:none}
+.zcap .lmask > span{transition:transform .9s cubic-bezier(.16,1,.3,1)}
+.zcap .lmask:nth-child(2) > span{transition-delay:.12s}
+.zoomed .zcap .lmask > span{transform:none}
+.zcap .sub{display:block;margin-top:18px;font-family:var(--font-mono);font-size:13px;
+  letter-spacing:.14em;text-transform:uppercase;font-weight:400;opacity:0;
+  transition:opacity .8s ease .5s}
+.zoomed .zcap .sub{opacity:1}
+
+/* ============ work pan: clip-wipe reveal on enter (Ragged Edge style) ============ */
+.workslide figure{clip-path:inset(0 100% 0 0 round 10px);
+  transition:clip-path 1.1s cubic-bezier(.16,1,.3,1)}
+.workslide.inview figure{clip-path:inset(0 0 0 0 round 10px)}
+
+/* ============ record plates ============ */
+.plates{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:36px}
+.plate{border:1px solid var(--ink);text-transform:uppercase;background:rgba(255,255,255,.25);
+  transition:transform .3s cubic-bezier(.16,1,.3,1),background .3s ease}
+.plate:hover{transform:translateY(-4px);background:rgba(255,255,255,.7)}
+.plate .head{display:flex;border-bottom:1px solid var(--ink);height:34px;
+  font-family:var(--font-mono);font-size:11px;letter-spacing:.06em}
+.plate .head .t{flex:1;display:flex;align-items:center;padding-left:12px;color:var(--muted)}
+.plate .head .n{min-width:44px;border-left:1px solid var(--ink);display:flex;
+  align-items:center;justify-content:center;font-family:var(--font-mono)}
+.plate .val{padding:18px 12px 6px;font-family:var(--font-mono);font-weight:500;
+  font-size:clamp(26px,2.6vw,34px)}
+.plate .src{padding:0 12px 14px;font-family:var(--font-mono);font-size:10.5px;
+  letter-spacing:.04em;color:var(--muted);line-height:1.6}
+
+/* ============ work: bpco horizontal pan, outlined titles ============ */
+.workpan{position:relative;overflow:hidden}
+.worktrack{display:flex;height:100dvh;align-items:center}
+.workslide{
+  flex:0 0 72vw;height:100%;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:34px;padding:0 6vw;
+}
+.workslide .ttl{
+  font-size:clamp(34px,5vw,72px);font-weight:600;letter-spacing:-.02em;
+  text-transform:uppercase;line-height:1.05;text-align:center;position:relative;
+  color:transparent;-webkit-text-stroke:1px var(--ink);
+  transition:color .35s ease,-webkit-text-stroke-color .35s ease;
+}
+.workslide .ttl .pnum{
+  position:absolute;top:-30px;left:-38px;font-family:var(--font-mono);font-size:15px;
+  letter-spacing:0;-webkit-text-stroke:0;color:var(--ink);
+}
+.workslide.active .ttl{color:var(--accent);-webkit-text-stroke:1px var(--accent)}
+.workslide figure{overflow:hidden;border-radius:10px;width:min(56vw,760px)}
+.workslide figure img{width:100%;height:min(34vw,460px);object-fit:cover;
+  transition:transform .8s cubic-bezier(.16,1,.3,1)}
+.workslide:hover figure img{transform:scale(1.045)}
+.workslide:hover .ttl{color:var(--accent);-webkit-text-stroke:1px var(--accent)}
+.workslide .cap{font-family:var(--font-mono);font-size:12px;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--muted)}
+.workhead{padding:76px 0 8px}
+
+/* ============ services ============ */
+.svc{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:36px}
+.svc .col{border:1px solid var(--ink);background:rgba(255,255,255,.25);
+  transition:transform .3s cubic-bezier(.16,1,.3,1),background .3s ease}
+.svc .col:hover{transform:translateY(-4px);background:rgba(255,255,255,.65)}
+.svc .col .head{border-bottom:1px solid var(--ink);padding:12px 16px;
+  font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase}
+.svc .col ul{list-style:none;padding:14px 16px 18px}
+.svc .col li{padding:6px 0;color:var(--muted)}
+
+/* ============ marquee (one per page) ============ */
+.mq{overflow:hidden;border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding:18px 0;background:var(--canvas)}
+.mq .track{display:flex;gap:56px;white-space:nowrap;width:max-content;
+  animation:mqslide 30s linear infinite}
+.mq span{font-size:19px;font-weight:600;letter-spacing:-.01em}
+.mq span.m{font-family:var(--font-mono);font-weight:400;font-size:15px;
+  letter-spacing:.08em;text-transform:uppercase;color:var(--muted);align-self:center}
+@keyframes mqslide{to{transform:translateX(-50%)}}
+.mq:hover .track{animation-play-state:paused}
+
+/* ============ coverage + call ============ */
+.coverage p{font-size:clamp(19px,2vw,23px);max-width:34em}
+.coverage .pcs{margin-top:14px;font-family:var(--font-mono);font-size:13px;
+  letter-spacing:.1em;color:var(--muted);text-transform:uppercase}
+.callband{
+  min-height:84vh;display:flex;align-items:center;justify-content:center;
+  position:relative;overflow:clip;padding:90px 0 70px;
+}
+.callband .postermeta{
+  position:absolute;z-index:3;font-family:var(--font-mono);font-size:12px;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--ink);line-height:1.8;
+  font-variant-numeric:tabular-nums;
+}
+.callband .pm1{left:32px;top:28px}
+.callband .pm2{right:32px;top:28px;text-align:right}
+.callband .pm3{left:32px;bottom:28px}
+.callband .pm4{right:32px;bottom:28px;text-align:right}
+.callband .burst{
+  position:absolute;z-index:1;left:50%;top:50%;width:min(46vw,560px);aspect-ratio:4/3;
+  transform:translate(-50%,-54%) rotate(-4deg);
+  clip-path:polygon(50% 0%,61% 18%,82% 7%,80% 28%,100% 32%,85% 48%,98% 66%,76% 66%,
+    75% 90%,57% 76%,44% 100%,36% 76%,14% 86%,20% 62%,0% 55%,18% 42%,6% 20%,28% 24%,32% 2%);
+}
+.callband .burst img{width:100%;height:100%;object-fit:cover}
+.callband .wrap{position:relative;z-index:2;text-align:center}
+.callband .bignum{
+  display:block;width:fit-content;margin:0 auto;
+  font-weight:600;font-size:clamp(64px,12.5vw,190px);line-height:.98;
+  letter-spacing:-.03em;font-variant-numeric:tabular-nums;white-space:nowrap;
+  color:var(--emboss);cursor:pointer;
+}
+.callband .bignum .d{display:inline-block;color:transparent;
+  -webkit-text-stroke:1.5px var(--ink);
+  transition:transform .3s cubic-bezier(.16,1,.3,1)}
+.callband .bignum .d.lit{color:var(--accent);-webkit-text-stroke:1.5px var(--accent)}
+.callband .bignum .sp{display:inline-block;width:.35em}
+.callband .bignum:hover .d{color:var(--accent);-webkit-text-stroke:1.5px var(--accent)}
+.callband .bignum:hover .d:nth-child(odd){transform:translateY(-6px)}
+.callband .bignum:hover .d:nth-child(even){transform:translateY(4px)}
+.callband .bignum:active{transform:translateY(1px)}
+.callband .underline-note{
+  margin-top:34px;font-size:17px;color:var(--muted);position:relative;z-index:2;
+}
+.callband .hand{position:absolute;right:11vw;top:20%;z-index:3}
+footer{border-top:1px solid var(--line);padding:28px 0 44px}
+footer .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;
+  font-family:var(--font-mono);font-size:11.5px;letter-spacing:.03em;
+  text-transform:uppercase;color:var(--muted);line-height:2}
+
+/* ============ entry + reveal ============ */
+.riser{opacity:0;transform:translateY(60px)}
+.loaded .riser{animation:showup 1s cubic-bezier(.16,1,.3,1) .1s forwards}
+.loaded .riser.d1{animation-delay:.2s}
+.loaded .riser.d2{animation-delay:.32s}
+.loaded .riser.d3{animation-delay:.5s}
+@keyframes showup{to{opacity:1;transform:translateY(0)}}
+.cuberiser{transform:translateY(110vh)}
+.loaded .cuberiser{animation:cubeup 1.25s cubic-bezier(.16,1,.3,1) .25s forwards}
+@keyframes cubeup{to{transform:translateY(0)}}
+.reveal{opacity:0;transform:translateY(36px);
+  transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+.reveal.inview{opacity:1;transform:none}
+
+/* ============ mobile ============ */
+@media (max-width:900px){
+  :root{--gutter:20px}
+  .loader,.underveil{display:none}
+  .topfade{height:96px}
+  .hud{grid-template-columns:auto auto;left:16px;right:16px;top:16px}
+  .hud .mid,.hud .mid2,.hud .gap,.hud .right .sub{display:none}
+  .specplate{display:none}
+  .pillnav{display:none}
+  .callbar{display:flex}
+  .runway{height:260vh}
+  .stage{position:sticky;top:0}
+  .intro h1{font-size:clamp(34px,10vw,52px)}
+  .stagecap{display:none}
+  .zoomrun{height:240vh}
+  .zoomstage{position:sticky;top:0}
+  .zframe{width:70vw}
+  .zmeta.zm1,.zmeta.zm2{top:72px}
+  .zmeta.zm2{display:none}
+  .zcap{font-size:clamp(28px,8vw,44px);width:88vw}
+  .prinrow{min-height:auto;padding:56px 0 40px;gap:36px}
+  .prinrow .emboss{font-size:30vw;top:34%}
+  .prinrow .inner{grid-template-columns:1fr;gap:14px}
+  .prinfacts .cells,.prinfacts.timeline .cells{grid-template-columns:1fr 1fr}
+  .prinfacts .cell{border-left:1px solid var(--ink) !important;border-bottom:1px solid var(--ink)}
+  .prinrow.pr3 .hand{bottom:auto}
+  .glyphfield{display:none}
+  .prinrow .hand{position:static;margin:18px auto 0;display:block;text-align:center}
+  .plates{grid-template-columns:1fr 1fr}
+  .workpan .worktrack{display:block;height:auto}
+  .workslide{padding:44px 20px;height:auto}
+  .workslide .ttl{color:var(--accent);-webkit-text-stroke:1px var(--accent);
+    font-size:clamp(28px,8vw,40px)}
+  .workslide .ttl .pnum{position:static;display:block;margin-bottom:8px}
+  .workslide figure{width:100%}
+  .workslide figure img{height:56vw}
+  .svc{grid-template-columns:1fr}
+  .sec{padding:60px 0}
+  .callband{min-height:auto;padding:90px 0 70px}
+  .callband .bignum{white-space:normal;font-size:clamp(52px,16vw,80px)}
+  .callband .postermeta{position:static;text-align:center;margin:6px 0}
+  .callband .pm1{margin-bottom:20px}
+  .callband{flex-direction:column}
+  .callband .burst{width:74vw;top:44%}
+  .callband .hand{position:static;display:block;margin:14px auto 0;text-align:center}
+  .mq span{font-size:16px}
+  .sparkle{display:none}
+  .ring.r2,.plus.p1,.plus.p3{display:none}
+    .ring.r1{width:220px;height:220px}
+  footer{padding-bottom:150px}
+}
+
+/* ============ reduced motion ============ */
+@media (prefers-reduced-motion:reduce){
+  .loader,.underveil{display:none}
+  .cuberiser{transform:none;animation:none}
+  .riser,.reveal{opacity:1 !important;transform:none !important;animation:none !important;transition:none !important}
+  .scrollcue .dots i{animation:none;opacity:.5}
+  .sparkle,.ring,.plus{animation:none}
+  .prinrow .emboss i{opacity:1;transform:none;transition:none}
+  .lmask > span{transform:none;transition:none}
+  .prinfacts .cell{opacity:1;transform:none;transition:none}
+  .runway{height:auto}
+  .stage{position:relative;height:auto;padding:140px 0 80px;flex-direction:column;gap:48px}
+  .intro{position:static;transform:none}
+  .cube{transform:none !important}
+  .zoomrun{height:auto}
+  .zoomstage{position:relative;height:72vh}
+  .zfig{transform:none !important}
+  .zframe,.zgrain{display:none}
+  .zvig{opacity:.5 !important}
+  .zcap .lmask > span{transform:none;transition:none}
+  .zcap .sub{opacity:1;transition:none}
+  .zmeta{color:#f4f2ef}
+  .workslide figure{clip-path:none;transition:none}
+  .workpan .worktrack{display:block;height:auto}
+  .workslide{height:auto;padding:44px 20px}
+  .workslide .ttl{color:var(--accent);-webkit-text-stroke:1px var(--accent)}
+  .mq .track{animation:none}
+  .plate:hover,.svc .col:hover,.prinrow.inview .prinfacts .cell:hover,
+  .workslide:hover figure img,.callband .bignum:hover .d:nth-child(odd),
+  .callband .bignum:hover .d:nth-child(even){transform:none}
+}
+</style>
+</head>
+<body>
+
+<div class="loader" id="loader">
+  <div class="msg">Loading <span id="pct">0</span>%</div>
+  <div class="bar"><div class="fill" id="fill"></div></div>
+  <div class="introline">D &amp; L Heating Ltd. Specialist gas engineers covering all aspects
+  of plumbing, heating and gas, domestic and industrial, from Ash, Hampshire.</div>
+</div>
+<div class="underveil"></div>
+
+<!-- floating background components -->
+<div class="bgfx" aria-hidden="true">
+  <i class="ring r1"></i><i class="ring r2"></i>
+  <span class="plus p1">+</span><span class="plus p2">+</span><span class="plus p3">+</span>
+</div>
+
+<!-- fixed chrome, outside the smoother -->
+<div class="topfade" aria-hidden="true"></div>
+<div class="hud" aria-hidden="true">
+  <div>
+    <div class="brand">D &amp; L Heating Ltd</div>
+    <div class="sub">Specialist Gas Engineers</div>
+  </div>
+  <div class="mid">Plumbing_heating_gas</div>
+  <div class="gap"></div>
+  <div class="mid2">Domestic_industrial</div>
+  <div class="right">
+    <div>Ash, Hampshire</div>
+    <div class="sub">Est. 1985</div>
+  </div>
+</div>
+
+<nav class="pillnav" aria-label="Main">
+  <a class="n1" href="#top">Home</a>
+  <a class="n2" href="#work">Work</a>
+  <a class="n3" href="tel:+447723954405">Call</a>
+  <span class="puck" aria-hidden="true"></span>
+</nav>
+
+<div class="scrollcue" aria-hidden="true">
+  <span>Please scroll down</span>
+  <span class="dots"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
+</div>
+
+<a class="callbar" href="tel:+447723954405">Call 07723 954405</a>
+
+<div id="smooth-wrapper">
+<div id="smooth-content">
+<main id="top">
+
+  <!-- ============ stage ============ -->
+  <div class="runway" id="runway">
+    <div class="stage" id="stage">
+      <div class="intro" id="intro">
+        <p class="eyebrow riser">Plumbing, heating and gas. Domestic and industrial.</p>
+        <h1 class="riser d1">D &amp; L<br>Heating Ltd</h1>
+        <p class="score riser d2"><b class="mono">9.92</b>&thinsp;/&thinsp;10 from 199 Checkatrade reviews</p>
+      </div>
+
+      <div class="cubewrap cuberiser" aria-hidden="true">
+        <div class="cube" id="cube">
+          <video id="cubevid" muted playsinline preload="auto"
+                 poster="assets/cube-closed-front.png">
+            <source src="assets/cube-turn.mp4" type="video/mp4">
+          </video>
+        </div>
+      </div>
+
+      <div class="specplate riser d3">
+        <div class="head"><span class="t">Checkatrade record</span><span class="n">9.92</span></div>
+        <div class="bodycell">199 reviews. Member since 2009.<br>Gas Safe registered.<br>Source: Checkatrade, Sept 2026</div>
+      </div>
+      <div class="stagecap riser d3">
+        Their work, their photographs<br>
+        <span class="mono">GU3&nbsp;&nbsp;GU10&nbsp;&nbsp;GU11&nbsp;&nbsp;GU12&nbsp;&nbsp;GU21&nbsp;&nbsp;GU34</span>
+        <span class="hand">not stock photos, theirs</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ intro copy ============ -->
+  <section class="sec" id="about">
+    <div class="wrap">
+      <h2 class="reveal">A family firm, three generations in.</h2>
+      <p class="reveal" style="color:var(--muted);max-width:60ch;margin-top:16px">
+        Luigi Auriemma has been in this trade since he was young, working with his father.
+        His son Domenico is now a director alongside him. The company was established in 1985
+        and works to its own strict professional standards.
+      </p>
+    </div>
+  </section>
+
+  <!-- ============ principles, embossed ============ -->
+  <div class="prinrow pr1">
+    <div class="emboss" aria-hidden="true">Upfront</div>
+    <div class="glyphfield" data-digit="1" aria-hidden="true"><canvas></canvas></div>
+    <span class="hand reveal">what to avoid, and why</span>
+    <svg class="sparkle" style="right:6.5vw;top:9vh" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0c.9 6.5 4.6 10.2 12 12-7.4 1.8-11.1 5.5-12 12-.9-6.5-4.6-10.2-12-12C7.4 10.2 11.1 6.5 12 0z"/></svg>
+    <div class="inner">
+      <div class="num reveal">(1)</div>
+      <p class="lead"><span class="lmask"><span>Upfront about the job</span></span><span class="lmask"><span>before it starts.</span></span></p>
+      <div class="desc reveal">
+        <p>Options quoted at different price points, with the advantages and disadvantages
+        of each, and what to avoid and why.</p>
+        <blockquote>"He listened to what we wanted and was upfront with any possible issues
+        that might arise."<cite>Bath fitted in a wet room, GU3</cite></blockquote>
+      </div>
+    </div>
+    <div class="prinfacts">
+      <div class="cells">
+        <div class="cell"><div class="k">Before the job</div><div class="v">Free estimates</div></div>
+        <div class="cell"><div class="k">Paying</div><div class="v">Cards accepted</div></div>
+        <div class="cell"><div class="k">Claims</div><div class="v">Insurance work undertaken</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="prinrow pr2">
+    <div class="emboss" aria-hidden="true">Tidy</div>
+    <div class="glyphfield" data-digit="2" aria-hidden="true"><canvas></canvas></div>
+    <div class="inner">
+      <div class="num reveal">(2)</div>
+      <p class="lead"><span class="lmask"><span>Tidy work,</span></span><span class="lmask"><span>house left as found.</span></span></p>
+      <div class="desc reveal">
+        <p>Work carried out to strict professional standards, and the house left as they
+        found it.</p>
+        <blockquote>"Great workmanship and they cleaned up after themselves, very
+        happy."<cite>Gas central heating service, GU12</cite></blockquote>
+      </div>
+    </div>
+    <div class="prinfacts">
+      <div class="cells">
+        <div class="cell"><div class="k">Cover</div><div class="v">Fully insured</div></div>
+        <div class="cell"><div class="k">Scope</div><div class="v">Domestic and industrial</div></div>
+        <div class="cell"><div class="k">Standard</div><div class="v">Gas Safe registered</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="prinrow pr3">
+    <div class="emboss" aria-hidden="true">Still here</div>
+    <div class="glyphfield" data-digit="3" aria-hidden="true"><canvas></canvas></div>
+    <span class="hand reveal">same number since 2009</span>
+    <div class="inner">
+      <div class="num reveal">(3)</div>
+      <p class="lead"><span class="lmask"><span>Still here,</span></span><span class="lmask"><span>forty years on.</span></span></p>
+      <div class="desc reveal">
+        <p>Founded 1985. On Checkatrade since 2009. The customers who found them a decade
+        ago are still calling the same number.</p>
+        <blockquote>"We've used D&amp;L Heating for all our plumbing needs since we moved
+        into the area over a decade ago."<cite>Central heating, GU11</cite></blockquote>
+      </div>
+    </div>
+    <div class="prinfacts timeline">
+      <div class="cells">
+        <div class="cell"><div class="k">Family enters the trade</div><div class="v">1975</div></div>
+        <div class="cell"><div class="k">Established</div><div class="v">1985</div></div>
+        <div class="cell"><div class="k">Joins Checkatrade</div><div class="v">2009</div></div>
+        <div class="cell"><div class="k">Third generation, Domenico</div><div class="v">2016</div></div>
+        <div class="cell"><div class="k">Reviews and counting</div><div class="v">199</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ zoom stage: the work, up close ============ -->
+  <div class="zoomrun" id="zoomrun">
+    <div class="zoomstage" id="zoomstage">
+      <figure class="zfig" id="zfig"><img src="assets/shower-navy-tile.jpg" alt="Completed shower room with an indigo linear tile feature wall, seen up close" loading="lazy"></figure>
+      <div class="zvig"></div>
+      <div class="zgrain" aria-hidden="true"></div>
+      <div class="zframe" id="zframe" aria-hidden="true"><i class="c1"></i><i class="c2"></i><i class="c3"></i><i class="c4"></i></div>
+      <div class="zmeta zm1">Their work, up close</div>
+      <div class="zmeta zm2">Shower room, indigo linear tile</div>
+      <div class="zmeta zm3">Their photograph, not stock</div>
+      <div class="zcap" id="zcap">
+        <span class="lmask"><span>Fitted complete.</span></span>
+        <span class="lmask"><span>Left as found.</span></span>
+        <span class="sub">Bathrooms, boilers, water mains. Since 1985.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ record ============ -->
+  <section class="sec band" id="record">
+    <div class="wrap">
+      <h2 class="reveal">The record</h2>
+      <div class="plates">
+        <div class="plate reveal">
+          <div class="head"><span class="t">Rating</span><span class="n">01</span></div>
+          <div class="val">9.92<span style="font-size:.5em">/10</span></div>
+          <div class="src">199 reviews, Checkatrade, September 2026</div>
+        </div>
+        <div class="plate reveal">
+          <div class="head"><span class="t">Established</span><span class="n">02</span></div>
+          <div class="val">1985</div>
+          <div class="src">Their printed letterhead</div>
+        </div>
+        <div class="plate reveal">
+          <div class="head"><span class="t">Member</span><span class="n">03</span></div>
+          <div class="val">2009</div>
+          <div class="src">Checkatrade member since December 2009</div>
+        </div>
+        <div class="plate reveal">
+          <div class="head"><span class="t">Certified</span><span class="n">04</span></div>
+          <div class="val" style="font-size:19px;line-height:1.5;text-transform:none">Gas Safe registered<br>Vaillant Advanced installer</div>
+          <div class="src">Checkatrade profile, September 2026</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ work: horizontal pan ============ -->
+  <section id="work">
+    <div class="workhead wrap">
+      <p class="seclabel reveal">Recent work</p>
+      <h2 class="reveal">Bathrooms fitted complete.</h2>
+    </div>
+    <div class="workpan" id="workpan">
+      <div class="worktrack" id="worktrack">
+        <div class="workslide">
+          <div class="ttl"><span class="pnum mono">(01)</span>Indigo shower room</div>
+          <figure><img src="assets/shower-navy-tile.jpg" alt="Completed shower room with an indigo linear tile feature wall and frameless glass screen" loading="lazy"></figure>
+          <div class="cap">Feature wall in deep indigo, frameless screen, chrome rainfall shower</div>
+        </div>
+        <div class="workslide">
+          <div class="ttl"><span class="pnum mono">(02)</span>Banded bathroom</div>
+          <figure><img src="assets/vanity-navy-band.jpg" alt="Bathroom with an indigo tile band, oak vanity unit and chrome towel radiator" loading="lazy"></figure>
+          <div class="cap">The same indigo carried as a banding course, oak vanity, ladder radiator</div>
+        </div>
+        <div class="workslide">
+          <div class="ttl"><span class="pnum mono">(03)</span>Walk-in shower</div>
+          <figure><img src="assets/shower-grey-chrome.jpg" alt="Walk-in shower in grey large format tile with recessed lit niches" loading="lazy"></figure>
+          <div class="cap">Grey large format, recessed lit niches, level tray</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ services ============ -->
+  <section class="sec band" id="services">
+    <div class="wrap">
+      <h2 class="reveal">All aspects of heating, plumbing and gas.</h2>
+      <div class="svc">
+        <div class="col reveal">
+          <div class="head">Heating and gas</div>
+          <ul>
+            <li>Boilers and full central heating installations</li>
+            <li>Servicing, maintenance and repairs</li>
+            <li>Advanced Vaillant approved installer</li>
+            <li>Hot water cylinders, repair and replacement</li>
+          </ul>
+        </div>
+        <div class="col reveal">
+          <div class="head">Bathrooms</div>
+          <ul>
+            <li>Full bathroom installations</li>
+            <li>Shower and wet rooms</li>
+            <li>Bathroom maintenance</li>
+          </ul>
+        </div>
+        <div class="col reveal">
+          <div class="head">Water and drainage</div>
+          <ul>
+            <li>Replacement of water mains</li>
+            <li>Hot and cold water services</li>
+            <li>Pipe work and pipe repair</li>
+            <li>Drainage and leak detection</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ coverage ============ -->
+  <section class="sec coverage" id="coverage">
+    <div class="wrap">
+      <p class="reveal">Working across Guildford, Farnham, Aldershot, Ash, Woking and Alton,
+      from their base in Ash, Hampshire.</p>
+      <p class="pcs reveal">Reviewed jobs: GU3 GU10 GU11 GU12 GU21 GU34</p>
+    </div>
+  </section>
+
+  <!-- ============ call ============ -->
+  <div class="mq" aria-hidden="true">
+    <div class="track">
+      <span>No job too small or too large</span><span class="m">Gas Safe registered</span>
+      <span>Fully insured</span><span class="m">Est. 1985</span>
+      <span>Domestic and industrial</span><span class="m">9.92 from 199 reviews</span>
+      <span>No job too small or too large</span><span class="m">Gas Safe registered</span>
+      <span>Fully insured</span><span class="m">Est. 1985</span>
+      <span>Domestic and industrial</span><span class="m">9.92 from 199 reviews</span>
+    </div>
+  </div>
+  <section class="callband band" id="call">
+    <div class="postermeta pm1">Talk to Luigi<br>Specialist Gas Engineers</div>
+    <div class="postermeta pm2">Est. 1985<br>Gas Safe registered</div>
+    <div class="postermeta pm3">9.92&thinsp;/&thinsp;10, 199 reviews<br>Checkatrade, Sept 2026</div>
+    <div class="postermeta pm4">Ash, Hampshire<br>Domestic and industrial</div>
+    <span class="hand reveal">ask for Luigi</span>
+    <div class="burst" aria-hidden="true"><img src="assets/shower-navy-tile.jpg" alt="" loading="lazy"></div>
+    <div class="wrap">
+      <a class="bignum" id="bignum" href="tel:+447723954405" aria-label="Call 07723 954405"></a>
+      <p class="underline-note">Fully insured. No job too small or too large.</p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="wrap">
+      <div>
+        D &amp; L Heating Ltd<br>
+        Registered in England, company 04825700<br>
+        VAT 528951318
+      </div>
+      <div style="text-align:right">
+        36 Moulsham Lane, Yateley,<br>
+        Hampshire GU46 7QY<br>
+        Figures sourced Checkatrade, September 2026
+      </div>
+    </div>
+  </footer>
+
+</main>
+</div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollSmoother.min.js"></script>
+<script>
+(function(){
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* black loader: count to 100, gate on window load, then lift and reveal */
+  var pctEl = document.getElementById('pct'), fillEl = document.getElementById('fill');
+  var winLoaded = false, pct = 0;
+  window.addEventListener('load', function(){ winLoaded = true; });
+  var mobileOrReduce = reduce || window.matchMedia('(max-width: 900px)').matches;
+  if (mobileOrReduce || !pctEl) {
+    window.addEventListener('load', function(){ document.body.classList.add('lifted','loaded'); });
+    if (document.readyState === 'complete') document.body.classList.add('lifted','loaded');
+  } else {
+    var tick = setInterval(function(){
+      var target = winLoaded ? 100 : 88;
+      pct = Math.min(target, pct + (winLoaded ? 7 : 2 + Math.random() * 4));
+      pctEl.textContent = Math.floor(pct);
+      fillEl.style.width = pct + '%';
+      if (pct >= 100) {
+        clearInterval(tick);
+        setTimeout(function(){ document.body.classList.add('lifted','loaded'); }, 250);
+      }
+    }, 60);
+  }
+
+  /* reveals */
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('inview'); io.unobserve(e.target); } });
+  }, {threshold:.18});
+  document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+
+  /* work slides: clip-wipe on enter */
+  var wsIo = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add('inview'); wsIo.unobserve(e.target); } });
+  }, {threshold:.25});
+  document.querySelectorAll('.workslide').forEach(function(el){ wsIo.observe(el); });
+
+  /* nav: mono scramble on hover, resolves left to right */
+  if (!reduce) {
+    var glyphs = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    document.querySelectorAll('.pillnav a').forEach(function(a){
+      var label = a.textContent, run = null;
+      a.addEventListener('mouseenter', function(){
+        var frame = 0; clearInterval(run);
+        run = setInterval(function(){
+          frame++;
+          a.textContent = label.split('').map(function(ch, i){
+            if (ch === ' ') return ch;
+            return i < frame - 2 ? ch : glyphs[(Math.random() * glyphs.length) | 0];
+          }).join('');
+          if (frame > label.length + 2) { clearInterval(run); a.textContent = label; }
+        }, 38);
+      });
+    });
+  }
+
+  /* principle rows: letter cascade + line masks + fact strips */
+  if (!reduce) {
+    document.querySelectorAll('.prinrow .emboss').forEach(function(el){
+      var chars = el.textContent.split('');
+      el.textContent = '';
+      chars.forEach(function(ch, i){
+        var sp = document.createElement('i');
+        sp.style.setProperty('--i', i);
+        sp.innerHTML = ch === ' ' ? '&nbsp;' : ch;
+        el.appendChild(sp);
+      });
+    });
+  }
+  /* glyph-field numerals: dense matrix of tiny number-glyphs, the row's
+     digit carved out as a denser region, cells cycling gently */
+  (function(){
+    if (reduce && false) {} /* reduced motion still gets one static render */
+    var SETS = {
+      '1': ['1','I','一','壹','i','|','1','I'],
+      '2': ['2','II','二','贰','z','Z','2','II'],
+      '3': ['3','III','三','叁','3','E','3','III']
+    };
+    var CELL = 16;
+    document.querySelectorAll('.glyphfield').forEach(function(wrap){
+      var digit = wrap.dataset.digit;
+      var glyphs = SETS[digit];
+      var cv = wrap.querySelector('canvas');
+      var ctx = cv.getContext('2d');
+      var cells = [], cols = 0, rows = 0, running = false, raf = null;
+
+      function build(){
+        var dpr = Math.min(2, window.devicePixelRatio || 1);
+        var w = wrap.clientWidth, h = wrap.clientHeight;
+        if (!w || !h) return;
+        cv.width = w * dpr; cv.height = h * dpr;
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        cols = Math.floor(w / CELL); rows = Math.floor(h / CELL);
+        /* mask: draw the giant digit offscreen, sample which cells it covers */
+        var mc = document.createElement('canvas');
+        mc.width = cols; mc.height = rows;
+        var mctx = mc.getContext('2d');
+        mctx.font = '700 ' + Math.floor(rows * 0.94) + 'px "Source Sans 3", sans-serif';
+        mctx.textAlign = 'center'; mctx.textBaseline = 'middle';
+        mctx.fillText(digit, cols / 2, rows / 2 + rows * 0.04);
+        var mask = mctx.getImageData(0, 0, cols, rows).data;
+        cells = [];
+        for (var r = 0; r < rows; r++) for (var c = 0; c < cols; c++) {
+          var inside = mask[(r * cols + c) * 4 + 3] > 100;
+          cells.push({
+            c: c, r: r, inside: inside,
+            g: glyphs[(Math.random() * glyphs.length) | 0],
+            a: inside ? .14 + Math.random() * .08 : .035 + Math.random() * .03
+          });
+        }
+        drawAll();
+      }
+      function drawCell(cell){
+        ctx.clearRect(cell.c * CELL, cell.r * CELL, CELL, CELL);
+        ctx.globalAlpha = cell.a;
+        ctx.fillStyle = '#141419';
+        ctx.font = '10px "Geist Mono", monospace';
+        ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+        ctx.fillText(cell.g, cell.c * CELL + CELL / 2, cell.r * CELL + CELL / 2);
+        ctx.globalAlpha = 1;
+      }
+      function drawAll(){ cells.forEach(drawCell); }
+      function tick(){
+        if (!running) return;
+        /* cycle a small handful of cells per frame - the subtle flicker */
+        for (var i = 0; i < 6; i++) {
+          var cell = cells[(Math.random() * cells.length) | 0];
+          if (!cell) continue;
+          cell.g = glyphs[(Math.random() * glyphs.length) | 0];
+          cell.a = cell.inside ? .14 + Math.random() * .08 : .035 + Math.random() * .03;
+          drawCell(cell);
+        }
+        raf = requestAnimationFrame(tick);
+      }
+      var vis = new IntersectionObserver(function(en){
+        var on = en[0].isIntersecting;
+        if (on && !running && !reduce) { running = true; tick(); }
+        if (!on && running) { running = false; cancelAnimationFrame(raf); }
+      }, {rootMargin: '10%'});
+      vis.observe(wrap);
+      build();
+      var rt; window.addEventListener('resize', function(){
+        clearTimeout(rt); rt = setTimeout(build, 200);
+      });
+    });
+  })();
+
+  /* call poster: per-digit spans, digits hard-cut between emboss and accent */
+  (function(){
+    var link = document.getElementById('bignum');
+    if (!link) return;
+    var numStr = '07723 954405';
+    var digits = [];
+    numStr.split('').forEach(function(ch){
+      if (ch === ' ') { var sp = document.createElement('span'); sp.className = 'sp'; link.appendChild(sp); return; }
+      var d = document.createElement('span'); d.className = 'd'; d.textContent = ch;
+      link.appendChild(d); digits.push(d);
+    });
+    if (reduce) { digits.forEach(function(d){ d.classList.add('lit'); }); return; }
+    var timer = null;
+    function cut(){
+      digits.forEach(function(d){ d.classList.remove('lit'); });
+      var n = 2 + ((Math.random() * 3) | 0);
+      for (var i = 0; i < n; i++) digits[(Math.random() * digits.length) | 0].classList.add('lit');
+    }
+    new IntersectionObserver(function(en){
+      if (en[0].isIntersecting) { if (!timer) { cut(); timer = setInterval(cut, 850); } }
+      else if (timer) { clearInterval(timer); timer = null; }
+    }, {threshold:.2}).observe(link);
+  })();
+
+  var prIo = new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if (e.isIntersecting){ e.target.classList.add('inview'); prIo.unobserve(e.target); }
+    });
+  }, {threshold:.3});
+  document.querySelectorAll('.prinrow').forEach(function(el){ prIo.observe(el); });
+
+  /* scrolled state for cue + callbar */
+  var sentinel = document.createElement('div');
+  sentinel.style.cssText = 'position:absolute;top:60vh;height:1px;width:1px';
+  document.getElementById('runway').appendChild(sentinel);
+  new IntersectionObserver(function(entries){
+    document.body.classList.toggle('scrolled', !entries[0].isIntersecting);
+  }).observe(sentinel);
+
+  if (reduce || !window.gsap) return;
+  gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
+
+  var mm = gsap.matchMedia();
+
+  mm.add('(min-width: 901px)', function(){
+    /* inertial scroll, the bpco smooth-wrapper feel */
+    var smoother = ScrollSmoother.create({ smooth: 1.2, effects: false, normalizeScroll: true });
+
+    /* stage: pin + scrub; scroll drives the box-turn video frame by frame */
+    gsap.set('#cube',{scale:1.06, y:'40vh'});
+    var vid = document.getElementById('cubevid');
+    var seek = {t:0};
+    var tl = gsap.timeline({
+      scrollTrigger:{ trigger:'#runway', start:'top top', end:'bottom bottom',
+        scrub:1, pin:'#stage', pinSpacing:false }
+    });
+    tl.to('#intro',{opacity:0, y:-60, ease:'none', duration:.18},0)
+      .to('#cube',{scale:1, y:'6vh', ease:'none', duration:.22},0)
+      .to(seek,{t:1, ease:'none', duration:.72, onUpdate:function(){
+          if (vid.duration) vid.currentTime = seek.t * (vid.duration - 0.05);
+        }},.22)
+      .to('#cube',{scale:.97, opacity:.85, ease:'none', duration:.06},.94);
+
+    /* embossed words drift slower than the page, bpco depth trick */
+    document.querySelectorAll('.prinrow .emboss, .callband .emboss').forEach(function(el){
+      gsap.fromTo(el,{yPercent:18},{yPercent:-18, ease:'none',
+        scrollTrigger:{trigger:el.parentElement, start:'top bottom', end:'bottom top', scrub:true}});
+    });
+
+    /* zoom stage: viewfinder frame zooms in to full bleed, holds, creeps, then lets go */
+    var zstage = document.getElementById('zoomstage');
+    gsap.set('#zfig',{scale:.34});
+    gsap.set('#zframe',{scale:1,opacity:1});
+    var ztl = gsap.timeline({
+      scrollTrigger:{ trigger:'#zoomrun', start:'top top', end:'bottom bottom',
+        scrub:1.2, pin:'#zoomstage', pinSpacing:false,
+        onUpdate:function(self){ zstage.classList.toggle('zoomed', self.progress > .36 && self.progress < .74); } }
+    });
+    ztl.to('#zfig',{scale:1, ease:'power2.inOut', duration:.4},0)
+       .to('.zvig',{opacity:.72, ease:'none', duration:.4},0)
+       .to('#zframe',{scale:3.4, opacity:0, ease:'power2.in', duration:.34},0)
+       .to('#zfig',{scale:1.12, ease:'none', duration:.24},.4)
+       .to('#zfig',{scale:.46, ease:'power2.inOut', duration:.36},.64)
+       .to('.zvig',{opacity:0, ease:'none', duration:.3},.64)
+       .to('#zframe',{scale:1.15, opacity:.9, ease:'power2.out', duration:.3},.7);
+
+    /* work: horizontal pan, active slide fills with the accent */
+    var track = document.getElementById('worktrack');
+    var slides = gsap.utils.toArray('.workslide');
+    var dist = function(){ return track.scrollWidth - window.innerWidth; };
+    gsap.to(track,{ x:function(){ return -dist(); }, ease:'none',
+      scrollTrigger:{ trigger:'#workpan', start:'top top', end:function(){ return '+=' + dist(); },
+        pin:true, scrub:1, invalidateOnRefresh:true,
+        onUpdate:function(self){
+          var idx = Math.min(slides.length - 1, Math.round(self.progress * (slides.length - 1)));
+          slides.forEach(function(s,i){ s.classList.toggle('active', i === idx); });
+        } }
+    });
+
+    return function(){ smoother && smoother.kill(); };
+  });
+
+  mm.add('(max-width: 900px)', function(){
+    /* no smoother, sticky stage, scrub only */
+    gsap.set('#cube',{scale:1.04, y:'34vh'});
+    var vidM = document.getElementById('cubevid');
+    var seekM = {t:0};
+    var tl = gsap.timeline({
+      scrollTrigger:{ trigger:'#runway', start:'top top', end:'bottom bottom', scrub:1 }
+    });
+    tl.to('#intro',{opacity:0, y:-40, ease:'none', duration:.2},0)
+      .to('#cube',{scale:1, y:'6vh', ease:'none', duration:.25},0)
+      .to(seekM,{t:1, ease:'none', duration:.7, onUpdate:function(){
+          if (vidM.duration) vidM.currentTime = seekM.t * (vidM.duration - 0.05);
+        }},.25);
+
+    var zstageM = document.getElementById('zoomstage');
+    gsap.set('#zfig',{scale:.5});
+    gsap.timeline({
+      scrollTrigger:{ trigger:'#zoomrun', start:'top top', end:'bottom bottom', scrub:1,
+        onUpdate:function(self){ zstageM.classList.toggle('zoomed', self.progress > .36 && self.progress < .74); } }
+    }).to('#zfig',{scale:1, ease:'power2.inOut', duration:.4},0)
+      .to('.zvig',{opacity:.72, ease:'none', duration:.4},0)
+      .to('#zframe',{scale:2.6, opacity:0, ease:'power2.in', duration:.34},0)
+      .to('#zfig',{scale:1.1, ease:'none', duration:.24},.4)
+      .to('#zfig',{scale:.6, ease:'power2.inOut', duration:.36},.64)
+      .to('.zvig',{opacity:0, ease:'none', duration:.3},.64);
+  });
+})();
+</script>
+</body>
+</html>
