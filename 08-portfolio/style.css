@@ -152,3 +152,6 @@ dialog{background:#101521;color:#f1f4fb}
 .header .brand-mark:hover img{transform:translateY(-1px) scale(1.03)}
 @media(max-width:520px){.header .brand-mark img{height:50px}}
 @media(prefers-reduced-motion:reduce){.header .brand-mark img{transition:none;transform:none!important}}
+
+/* v33: header is just the monogram. No bar, no border, no nav. */
+.header{background:transparent;border-bottom:0;justify-content:flex-start}
