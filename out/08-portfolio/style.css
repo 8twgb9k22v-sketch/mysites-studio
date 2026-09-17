@@ -121,3 +121,27 @@ dialog{background:#101521;color:#f1f4fb}
 @media(max-width:800px){.identity-stack>span{font-size:clamp(60px,14vw,112px)}}
 @media(max-width:460px){.identity-label{font-size:8px;left:20px}.identity-stack>span{font-size:17vw}.experiment-caption{font-size:10px;left:20px}}
 @media(prefers-reduced-motion:reduce){.identity-stack{transform:none!important}.identity-stack>span{animation:none!important;transition:none!important}}
+
+/* v30: header bar runs edge to edge; side margin becomes padding so brand/nav positions are unchanged. */
+.header{margin:0;padding:0 3.4%}
+@media(max-width:520px){.header{padding:0 5%}}
+
+/* v31: flat monochrome pill buttons. One shape for every control; cobalt only on the three primary actions. */
+.nav-contact,.filters button,.scene-tools button,.experiment>button,.brand-ident button,.contact-button,.save-brief{
+  border:1px solid rgb(255 255 255 / .38);border-radius:999px;background:transparent;color:#f1f4fb;
+  transition:background-color .22s var(--ease),color .22s var(--ease),border-color .22s var(--ease),transform .22s var(--ease)
+}
+.filters button:not(.active),.experiment>button,.brand-ident button{background:transparent;color:#f1f4fb;border-color:rgb(255 255 255 / .38)}
+.filters button:not(.active):hover,.experiment>button:hover,.brand-ident button:hover{background:#f4f6fb;color:#090b12;border-color:#f4f6fb}
+.nav-contact,.filters button.active,.save-brief{background:var(--acid);color:#fff;border-color:var(--acid)}
+.nav-contact:hover,.save-brief:hover{background:#3563ff;border-color:#3563ff}
+.scene-tools{background:transparent;padding:0}
+.scene-tools button,.experiment>button{padding:9px 16px;font-size:11px}
+.scene-tools button{background:#090b12d9;border-color:transparent}
+.scene-tools button:hover{background:#090b12;border-color:rgb(255 255 255 / .38)}
+.contact-button{background:#f4f6fb;color:#090b12;border-color:#f4f6fb}
+.contact-button:hover{background:#fff;transform:translateY(-2px)}
+.nav-contact:active,.filters button:active,.scene-tools button:active,.experiment>button:active,.brand-ident button:active,.contact-button:active,.save-brief:active{transform:scale(.97)}
+@media(prefers-reduced-motion:reduce){
+  .nav-contact,.filters button,.scene-tools button,.experiment>button,.brand-ident button,.contact-button,.save-brief{transition:none;transform:none!important}
+}
