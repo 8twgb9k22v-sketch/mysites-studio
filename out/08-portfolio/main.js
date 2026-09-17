@@ -42,10 +42,12 @@ document.querySelector('#open-brief').addEventListener('click',()=>dialog.showMo
 document.querySelector('#close-brief').addEventListener('click',()=>dialog.close());
 dialog.addEventListener('click',event=>{if(event.target===dialog){const r=dialog.getBoundingClientRect();if(event.clientX<r.left||event.clientX>r.right||event.clientY<r.top||event.clientY>r.bottom)dialog.close()}});
 document.querySelector('#brief-form').addEventListener('submit',event=>{
- event.preventDefault();const values=new FormData(event.target);
- const text=`MYSITES — PROJECT BRIEF\n\nBusiness: ${values.get('business').trim()}\nProject: ${values.get('service')}\n\n${values.get('details').trim()}\n\nPrepared locally. Nothing has been sent.\n`;
- const blob=new Blob([text],{type:'text/plain;charset=utf-8'});const url=URL.createObjectURL(blob);const a=document.createElement('a');a.href=url;a.download='mysites-project-brief.txt';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);
- document.querySelector('#brief-status').textContent='Your brief has been downloaded. Nothing has been sent.';
+ event.preventDefault();const values=new FormData(event.target);const business=values.get('business').trim();
+ const body=`Business: ${business}\nProject: ${values.get('service')}\n\n${values.get('details').trim()}\n`;
+ const mailto=`mailto:mysitesstudio@gmail.com?subject=${encodeURIComponent('Website brief: '+business)}&body=${encodeURIComponent(body)}`;
+ event.target.dataset.mailto=mailto;
+ window.location.href=mailto;
+ document.querySelector('#brief-status').innerHTML='Your email app should open with the brief filled in. If it does not, copy it into an email to <a href="mailto:mysitesstudio@gmail.com">mysitesstudio@gmail.com</a>.';
 });
 
 // Both films stop offscreen and respect the visitor's motion preferences.
