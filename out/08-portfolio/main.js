@@ -10,7 +10,7 @@ const root = document.querySelector('#projects');
 for (const project of projects) {
  const article=document.createElement('article');article.className='project';article.dataset.category=project.category;article.dataset.site=project.path;
  const url='../05-example-sites/'+project.path+'/';
- article.innerHTML=`<a class="project-visual" href="${url}" target="_blank" rel="noopener" aria-label="Open ${project.name} preview" style="--project-bg:${project.colour}"><img src="assets/${project.image}.webp" width="${project.width||1280}" height="${project.height||720}" loading="lazy" alt="${project.name} website preview"></a><div class="project-meta"><h3><a href="${url}" target="_blank" rel="noopener">${project.name} ↗</a></h3><span class="project-type">${project.kind}</span></div><p class="project-desc">${project.description}</p><div class="project-links"><span>${project.status}</span><a href="${url}" target="_blank" rel="noopener">Open site ↗</a>${(project.versions||[]).map(([label,path])=>`<a href="../05-example-sites/${path}/" target="_blank" rel="noopener">${label} ↗</a>`).join('')}</div>`;
+ article.innerHTML=`<a class="project-visual" href="${url}" target="_blank" rel="noopener" aria-label="Open ${project.name} preview" style="--project-bg:${project.colour}"><video class="preview" muted playsinline preload="metadata" poster="assets/${project.image}.webp" width="${project.width||1280}" height="${project.height||720}" aria-label="${project.name} website preview, scrolls with the page"><source src="assets/previews/${project.path}.mp4" type="video/mp4"></video></a><div class="project-meta"><h3><a href="${url}" target="_blank" rel="noopener">${project.name} ↗</a></h3><span class="project-type">${project.kind}</span></div><p class="project-desc">${project.description}</p><div class="project-links"><span>${project.status}</span><a href="${url}" target="_blank" rel="noopener">Open site ↗</a>${(project.versions||[]).map(([label,path])=>`<a href="../05-example-sites/${path}/" target="_blank" rel="noopener">${label} ↗</a>`).join('')}</div>`;
  root.append(article);
 }
 for(const button of document.querySelectorAll('[data-filter]'))button.addEventListener('click',()=>{
@@ -71,3 +71,31 @@ for(const study of document.querySelectorAll('.brand-ident')){
  document.addEventListener('visibilitychange',sync);
  sync();
 }
+
+
+// Home-page previews scrub with the page: each clip is the site scrolling top to bottom, and the card's
+// position in the viewport picks the frame. Only clips near the viewport are touched.
+(() => {
+ if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+ const live = new Set();
+ const io = new IntersectionObserver(entries => {
+  for (const e of entries) {
+   const v = e.target;
+   if (e.isIntersecting) { live.add(v); if (!v.dataset.primed) { v.dataset.primed = '1'; v.play().then(() => v.pause()).catch(() => {}); } }
+   else live.delete(v);
+  }
+ }, { rootMargin: '25% 0px' });
+ for (const v of document.querySelectorAll('.project video.preview')) io.observe(v);
+ function update() {
+  const vh = innerHeight;
+  for (const v of live) {
+   if (!v.duration || v.seeking) continue;
+   const r = v.getBoundingClientRect();
+   const p = Math.min(1, Math.max(0, 1 - (r.top + r.height) / (vh + r.height)));
+   const t = p * (v.duration - .08);
+   if (Math.abs(v.currentTime - t) > .06) v.currentTime = t;
+  }
+ }
+ addEventListener('scroll', update, { passive: true });
+ (function tick() { update(); requestAnimationFrame(tick); })();
+})();

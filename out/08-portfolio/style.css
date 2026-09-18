@@ -181,3 +181,6 @@ dialog{background:#101521;color:#f1f4fb}
 @keyframes card-enter{from{opacity:0;transform:translateY(56px) scale(.965)}to{opacity:1;transform:none}}
 @keyframes card-drift{from{transform:translateY(22px)}to{transform:translateY(-22px)}}
 @keyframes card-drift-b{from{transform:translateY(34px)}to{transform:translateY(-34px)}}
+
+/* v37: home-page previews are scroll-scrubbed clips of each site. */
+.project-visual video{display:block;width:100%;height:auto;background:var(--project-bg,#090b12)}
