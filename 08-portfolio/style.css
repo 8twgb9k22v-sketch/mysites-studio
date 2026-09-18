@@ -185,7 +185,10 @@ dialog{background:#101521;color:#f1f4fb}
 /* v37: home-page previews are scroll-scrubbed clips of each site. */
 .project-visual video{display:block;width:100%;height:auto;background:var(--project-bg,#090b12)}
 
-/* v38: blue-frames film stacked above the chrome montage; the monochrome ident stretches to match the stack. */
-.brand-stack{display:grid;gap:24px;min-width:0}
-.brand-studies>figure.brand-ident{aspect-ratio:auto;align-self:stretch;min-height:0}
-@media(max-width:700px){.brand-studies>figure.brand-ident{aspect-ratio:4/5}}
+/* v39: blue-frames film sits to the right of the playground intro; the two brand films go back to a plain pair. */
+.play-intro{display:grid;grid-template-columns:minmax(0,1fr) minmax(260px,400px);grid-template-areas:"h f" "p f";column-gap:48px;align-items:end}
+.play-intro h2{grid-area:h}
+.play-intro>p:last-child{grid-area:p}
+.play-intro .brand-ident{grid-area:f;aspect-ratio:4/5;height:auto;margin:0;justify-self:end;width:100%}
+.play-intro .brand-ident video{width:100%;height:100%;object-fit:contain}
+@media(max-width:700px){.play-intro{grid-template-columns:1fr;grid-template-areas:"h" "p" "f";row-gap:24px}.play-intro .brand-ident{justify-self:stretch}}
