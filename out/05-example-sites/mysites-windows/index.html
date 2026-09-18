@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MySites Windows. A playground.</title>
+<meta name="description" content="A MySites design concept: a wall of type that scrolls behind a set of drifting neon windows. Built as a study, not a client site.">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%231645ff'/%3E%3Ctext x='12' y='47' font-size='40' font-family='Arial' font-weight='bold' fill='white'%3EM%3C/text%3E%3C/svg%3E">
+<style>
+/* Design concept by MySites. The mechanics (a scrolling wall of type behind drifting windows) are a study of a well known
+   playground-site pattern; all words, colours and artwork here are MySites' own. */
+@font-face{font-family:"Anton";src:url("assets/anton.woff2") format("woff2");font-display:swap}
+:root{--grey:#b9b9b9;--cobalt:#1645ff;--magenta:#ff1fa5;--lime:#d9ff2b;--ink:#000}
+*{box-sizing:border-box;margin:0;padding:0}
+html{background:var(--ink);color:#fff;scroll-behavior:auto}
+body{font-family:"Helvetica Neue",Arial,sans-serif;background:var(--ink);min-height:100vh;overflow-x:hidden}
+.runway{height:520vh}
+.wall{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+.col{position:absolute;left:0;right:0;top:0;will-change:transform}
+.line{height:100vh;height:100svh;display:flex;align-items:center;justify-content:center;font-family:"Anton",Impact,"Arial Narrow Bold",sans-serif;font-size:118svh;line-height:1;color:#fff;white-space:nowrap;letter-spacing:-.02em;will-change:transform}
+.line span{display:inline-block;transform-origin:center;will-change:transform}
+.win{position:fixed;left:0;top:0;width:min(240px,42vw);aspect-ratio:1.12;border:4px solid var(--b);background:var(--bg);z-index:2;overflow:hidden;will-change:transform;box-shadow:0 0 0 1px #000}
+.win .bar{position:absolute;left:8px;right:8px;bottom:8px;height:15px;background:var(--b);color:#000;font-size:9px;font-weight:800;letter-spacing:.02em;text-transform:uppercase;padding:3px 6px;line-height:1;white-space:nowrap;overflow:hidden;z-index:2}
+.win .stage{position:absolute;inset:0 0 30px;overflow:hidden}
+.item{position:absolute;will-change:transform}
+.item img{display:block;width:100%;height:auto}
+.item.shot img{width:auto;height:100%}
+.item.shot{height:78%}
+.item.star{font-size:74px;line-height:1;color:#fff;font-weight:700}
+.tag{position:fixed;background:#fff;color:#000;font-size:9px;font-weight:800;letter-spacing:.03em;text-transform:uppercase;padding:4px 7px;line-height:1.35;z-index:3;text-decoration:none;white-space:nowrap}
+a.tag:hover{background:var(--lime)}
+.tag.stack{white-space:pre-line;text-align:left}
+.brief{position:fixed;left:16px;bottom:16px;z-index:4;font-size:9px;letter-spacing:.06em;text-transform:uppercase;color:#8a8a8a;max-width:220px;line-height:1.5}
+@media(max-width:620px){
+  .line{font-size:70svh}
+  .win{width:38vw}
+  .win .bar{font-size:8px;height:14px;left:6px;right:6px;bottom:6px}
+  .item.star{font-size:48px}
+  .tag{font-size:8px;padding:3px 5px}
+  .hide-m{display:none}
+}
+@media(prefers-reduced-motion:reduce){
+  .col,.line span,.win,.item{transition:none!important}
+}
+</style>
+</head>
+<body>
+<div class="runway" aria-hidden="true"></div>
+
+<div class="wall" aria-hidden="true">
+  <div class="col" id="col"></div>
+</div>
+
+<!-- windows: --b border, --bg fill, data-x/y are home positions in percent, data-d is cursor depth -->
+<div class="win" style="--b:var(--cobalt);--bg:var(--grey)" data-x="9" data-y="18" data-d="1.4" data-kind="chrome"><div class="stage"></div><div class="bar">Good businesses.</div></div>
+<div class="win" style="--b:var(--magenta);--bg:var(--cobalt)" data-x="29" data-y="8" data-d="0.8" data-kind="stars"><div class="stage"></div><div class="bar">Unforgettable websites.</div></div>
+<div class="win" style="--b:var(--magenta);--bg:var(--lime)" data-x="52" data-y="4" data-d="1.1" data-kind="shot-organic"><div class="stage"></div><div class="bar">MySites Motion</div></div>
+<div class="win" style="--b:var(--lime);--bg:var(--magenta)" data-x="6" data-y="55" data-d="0.6" data-kind="white"><div class="stage"></div><div class="bar">Never too bold</div></div>
+<div class="win" style="--b:var(--lime);--bg:var(--grey)" data-x="38" data-y="48" data-d="1.6" data-kind="shot-terrain"><div class="stage"></div><div class="bar">Terrain Surrey</div></div>
+<div class="win" style="--b:var(--grey);--bg:var(--cobalt)" data-x="66" data-y="36" data-d="0.9" data-kind="shot-industrial"><div class="stage"></div><div class="bar">MySites Industrial</div></div>
+<div class="win hide-m" style="--b:var(--cobalt);--bg:var(--lime)" data-x="72" data-y="66" data-d="1.3" data-kind="mix"><div class="stage"></div><div class="bar">Scroll scroll scroll</div></div>
+
+<!-- small tags, fixed like the reference -->
+<a class="tag" href="../../08-portfolio/" style="left:16px;top:16px">Back to MySites</a>
+<a class="tag" href="https://www.instagram.com/" style="left:31%;top:31%">Instagram</a>
+<span class="tag stack" style="left:23%;top:41%">@mysitesstudio
+@mysitesstudio
+@mysitesstudio</span>
+<a class="tag" href="../../08-portfolio/#contact" style="left:19%;top:66%">Have a project?</a>
+<span class="tag stack hide-m" style="right:4%;top:40%">Follow me
+Follow me
+Follow me
+Follow me</span>
+<a class="tag" href="mailto:mysitesstudio@gmail.com" style="right:8%;top:55%">Email</a>
+<span class="tag stack hide-m" style="right:4%;bottom:14%">Share share
+Share share
+Share share</span>
+
+<p class="brief">MySites design concept. A playground, not a client site. Scroll, move your cursor.</p>
+
+<script>
+(() => {
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const words = ['MYSITES', 'STUDIO'];
+  const col = document.getElementById('col');
+  const COUNT = 8;
+  for (let i = 0; i < COUNT; i++) {
+    const d = document.createElement('div'); d.className = 'line';
+    const s = document.createElement('span'); s.textContent = words[i % 2]; d.append(s); col.append(d);
+  }
+  const lines = [...col.children];
+  let vw = innerWidth, vh = innerHeight, lineH = vh;
+
+  // Fit each word to the viewport width, like the reference's stretched wall of type.
+  function fit() {
+    vw = innerWidth; vh = innerHeight; lineH = lines[0].offsetHeight || vh;
+    for (const l of lines) {
+      const s = l.firstChild; s.style.transform = 'none';
+      const w = s.getBoundingClientRect().width || 1;
+      s.dataset.sx = Math.min(1.4, Math.max(0.55, vw * 1.02 / w)).toFixed(4);   // let long words clip at the edges like the reference
+    }
+  }
+  fit();
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+  addEventListener('resize', fit);
+
+  // Windows: artwork inside each stage
+  const art = {
+    chrome: () => rep(4, i => img('assets/monogram.webp', 70 + i * 18)),
+    white:  () => rep(5, i => img('assets/monogram-white.png', 60 + i * 12)),
+    stars:  () => rep(6, () => glyph('✳')),
+    mix:    () => [...rep(2, i => img('assets/monogram.webp', 90 + i * 30)), ...rep(3, () => glyph('✳'))],
+    'shot-organic': () => [shot('assets/shot-organic.webp')],
+    'shot-terrain': () => [shot('assets/shot-terrain.webp')],
+    'shot-industrial': () => [shot('assets/shot-industrial.webp')],
+  };
+  function rep(n, f) { return Array.from({ length: n }, (_, i) => f(i)); }
+  function img(src, w) { const d = document.createElement('div'); d.className = 'item'; d.style.width = w + 'px'; const i = new Image(); i.src = src; i.alt = ''; i.decoding = 'async'; d.append(i); return d; }
+  function shot(src) { const d = document.createElement('div'); d.className = 'item shot'; const i = new Image(); i.src = src; i.alt = ''; i.decoding = 'async'; d.append(i); return d; }
+  function glyph(ch) { const d = document.createElement('div'); d.className = 'item star'; d.textContent = ch; return d; }
+
+  const wins = [...document.querySelectorAll('.win')].map((el, wi) => {
+    const stage = el.querySelector('.stage');
+    const items = art[el.dataset.kind]().map((node, i) => {
+      const x = 8 + ((i * 37 + wi * 11) % 62), y = 4 + ((i * 53 + wi * 7) % 56);
+      node.style.left = x + '%'; node.style.top = y + '%';
+      stage.append(node);
+      return { node, ph: i * 1.7 + wi, rot: ((i * 47) % 60) - 30, sp: .4 + (i % 3) * .25 };
+    });
+    return { el, x: +el.dataset.x, y: +el.dataset.y, d: +el.dataset.d, ph: wi * 1.3, items };
+  });
+
+  let mx = 0, my = 0, tx = 0, ty = 0, t0 = performance.now();
+  addEventListener('pointermove', e => { if (e.pointerType === 'touch') return; tx = e.clientX / vw - .5; ty = e.clientY / vh - .5; }, { passive: true });
+
+  function frame(now) {
+    const t = (now - t0) / 1000;
+    mx += (tx - mx) * .06; my += (ty - my) * .06;
+
+    // Wall of type: scroll drives it, time keeps it creeping so it never sits still.
+    const total = lineH * COUNT;
+    const drift = reduce ? 0 : t * 28;
+    let off = (scrollY * 1.15 + drift) % total;
+    col.style.transform = `translate3d(0, ${(-off).toFixed(2)}px, 0)`;
+    for (let i = 0; i < lines.length; i++) {
+      const s = lines[i].firstChild;
+      const centre = i * lineH - off + lineH / 2;         // line centre in viewport px
+      const dist = Math.min(1, Math.abs(centre - vh / 2) / (vh * 1.05));
+      const sy = reduce ? 1 : (0.18 + 0.82 * (1 - dist * dist));   // squish as a line leaves the middle
+      s.style.transform = `scale(${s.dataset.sx || 1}, ${sy.toFixed(3)})`;
+    }
+
+    // Windows wander round their home spot and lean away from the cursor at different depths.
+    for (const w of wins) {
+      const wx = reduce ? 0 : Math.sin(t * .23 + w.ph) * 26 + Math.sin(t * .11 + w.ph * 2) * 14;
+      const wy = reduce ? 0 : Math.cos(t * .19 + w.ph) * 22 + Math.cos(t * .07 + w.ph) * 10;
+      const px = -mx * 60 * w.d, py = -my * 44 * w.d;
+      const hx = w.x / 100 * (vw - w.el.offsetWidth), hy = w.y / 100 * (vh - w.el.offsetHeight);   // home spot stays inside the viewport
+      w.el.style.transform = `translate3d(${(hx + wx + px).toFixed(1)}px, ${(hy + wy + py).toFixed(1)}px, 0)`;
+      for (const it of w.items) {
+        const ix = reduce ? 0 : Math.sin(t * it.sp + it.ph) * 18 + mx * 30 * w.d;
+        const iy = reduce ? 0 : Math.cos(t * it.sp * .8 + it.ph) * 14 + my * 22 * w.d;
+        const r = reduce ? it.rot : it.rot + Math.sin(t * .5 + it.ph) * 12;
+        it.node.style.transform = `translate3d(${ix.toFixed(1)}px, ${iy.toFixed(1)}px, 0) rotate(${r.toFixed(1)}deg)`;
+      }
+    }
+    if (!(reduce && document.hidden)) requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>

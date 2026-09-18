@@ -1,5 +1,6 @@
 const projects = [
  {name:'MySites Motion',image:'mysites-organic-concept',width:1448,height:1086,category:'creative',kind:'Brand & digital studio',description:'Sculptural moss, confident typography and an organic visual identity.',path:'mysites-organic',colour:'#15180f',status:'Design concept'},
+ {name:'MySites Windows',image:'mysites-windows-concept',width:1448,height:1086,category:'creative',kind:'Type & motion playground',description:'A wall of type, seven drifting windows and nothing standing still.',path:'mysites-windows',colour:'#000000',status:'Design concept'},
  {name:'Terrain Surrey',image:'terrain',category:'business',kind:'Gardens & landscaping',description:'A fresh, image-led home for a family garden business.',path:'terrain-surrey',colour:'#b8c8f3',status:'Design concept'},
  {name:'Annexe',image:'annexe-hq',width:2295,height:1350,category:'creative',kind:'Spatial experience',description:'A walk through a courtyard. Six material studies. A different way to explore.',path:'showroom',colour:'#c4ccda',status:'Experimental build'},
  {name:'MySites Studio',image:'mysites-architecture-concept',width:1448,height:1086,category:'business',kind:'Architecture & interiors',description:'Considered architecture, a natural setting and a refined digital presence.',path:'mysites-architecture',colour:'#25311c',status:'Design concept'},
