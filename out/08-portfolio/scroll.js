@@ -8,8 +8,8 @@ function configureScroll() {
     autoRaf: true,
     smoothWheel: true,
     syncTouch: false,
-    lerp: .12,
-    wheelMultiplier: .9,
+    lerp: .085,
+    wheelMultiplier: .8,
     prevent: node => node.closest('dialog, textarea, [data-lenis-prevent]')
   });
 }
