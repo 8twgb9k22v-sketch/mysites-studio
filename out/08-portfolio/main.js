@@ -56,7 +56,7 @@ for(const study of document.querySelectorAll('.brand-ident')){
  const film=study.querySelector('video');
  const button=study.querySelector('button');
  const name=film.id==='montage-film'?'chrome':film.id==='blue-film'?'blue':'monochrome';
- film.defaultPlaybackRate=film.playbackRate=name==='monochrome'?2:1;
+ film.defaultPlaybackRate=film.playbackRate=name==='monochrome'?2:name==='chrome'?.9:1;
  let visible=false,paused=motionPreference.matches;
  function sync(){
   if(visible&&!paused&&!motionPreference.matches&&!document.hidden)film.play().catch(()=>{});else film.pause();
