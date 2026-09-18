@@ -2,15 +2,15 @@ const projects = [
  {name:'MySites Motion',image:'mysites-organic-concept',width:1448,height:1086,category:'creative',kind:'Brand & digital studio',description:'Sculptural moss, confident typography and an organic visual identity.',path:'mysites-organic',colour:'#15180f',status:'Design concept'},
  {name:'MySites Windows',image:'mysites-windows-concept',width:1448,height:1086,category:'creative',kind:'Type & motion playground',description:'A wall of type, seven drifting windows and nothing standing still.',path:'mysites-windows',colour:'#000000',status:'Design concept'},
  {name:'Terrain Surrey',image:'terrain',category:'business',kind:'Gardens & landscaping',description:'A fresh, image-led home for a family garden business.',path:'terrain-surrey',colour:'#b8c8f3',status:'Design concept'},
- {name:'Annexe',image:'annexe-hq',width:2295,height:1350,category:'creative',kind:'Spatial experience',description:'A walk through a courtyard. Six material studies. A different way to explore.',path:'showroom',colour:'#c4ccda',status:'Experimental build'},
- {name:'MySites Studio',image:'mysites-architecture-concept',width:1448,height:1086,category:'business',kind:'Architecture & interiors',description:'Considered architecture, a natural setting and a refined digital presence.',path:'mysites-architecture',colour:'#25311c',status:'Design concept'},
+ {name:'Annexe',image:'annexe-hq',width:2295,height:1350,category:'creative',kind:'Spatial experience',description:'A walk through a courtyard. Six material studies. A different way to explore.',path:'showroom',colour:'#c4ccda',status:'Experimental build',slope:.12},
+ {name:'MySites Studio',image:'mysites-architecture-concept',width:1448,height:1086,category:'business',kind:'Architecture & interiors',description:'Considered architecture, a natural setting and a refined digital presence.',path:'mysites-architecture',colour:'#25311c',status:'Design concept',still:true},
  {name:'MySites Industrial',image:'mysites-industrial-concept',width:1448,height:1086,category:'business',kind:'Engineering & product design',description:'A precise industrial direction. Machined details, monochrome and purposeful design.',path:'mysites-industrial',colour:'#c6c7ca',status:'Design concept'},
 ];
 const root = document.querySelector('#projects');
 for (const project of projects) {
  const article=document.createElement('article');article.className='project';article.dataset.category=project.category;article.dataset.site=project.path;
  const url='../05-example-sites/'+project.path+'/';
- article.innerHTML=`<a class="project-visual" href="${url}" target="_blank" rel="noopener" aria-label="Open ${project.name} preview" style="--project-bg:${project.colour}"><video class="preview" muted playsinline preload="metadata" poster="assets/${project.image}.webp" width="${project.width||1280}" height="${project.height||720}" aria-label="${project.name} website preview, scrolls with the page"><source src="assets/previews/${project.path}.mp4" type="video/mp4"></video></a><div class="project-meta"><h3><a href="${url}" target="_blank" rel="noopener">${project.name} ↗</a></h3><span class="project-type">${project.kind}</span></div><p class="project-desc">${project.description}</p><div class="project-links"><span>${project.status}</span><a href="${url}" target="_blank" rel="noopener">Open site ↗</a>${(project.versions||[]).map(([label,path])=>`<a href="../05-example-sites/${path}/" target="_blank" rel="noopener">${label} ↗</a>`).join('')}</div>`;
+ article.innerHTML=`<a class="project-visual" href="${url}" target="_blank" rel="noopener" aria-label="Open ${project.name} preview" style="--project-bg:${project.colour}">${project.still?`<img src="assets/${project.image}.webp" width="${project.width||1280}" height="${project.height||720}" loading="lazy" alt="${project.name} website preview">`:`<video class="preview" muted playsinline preload="metadata" poster="assets/${project.image}.webp" width="${project.width||1280}" height="${project.height||720}" data-slope="${project.slope||''}" aria-label="${project.name} website preview, scrolls with the page"><source src="assets/previews/${project.path}.mp4" type="video/mp4"></video>`}</a><div class="project-meta"><h3><a href="${url}" target="_blank" rel="noopener">${project.name} ↗</a></h3><span class="project-type">${project.kind}</span></div><p class="project-desc">${project.description}</p><div class="project-links"><span>${project.status}</span><a href="${url}" target="_blank" rel="noopener">Open site ↗</a>${(project.versions||[]).map(([label,path])=>`<a href="../05-example-sites/${path}/" target="_blank" rel="noopener">${label} ↗</a>`).join('')}</div>`;
  root.append(article);
 }
 for(const button of document.querySelectorAll('[data-filter]'))button.addEventListener('click',()=>{
@@ -95,7 +95,8 @@ for(const study of document.querySelectorAll('.brand-ident')){
    if (!v.duration || v.seeking) continue;
    const r = v.getBoundingClientRect();
    const raw = 1 - (r.top + r.height) / (vh + r.height);          // 0 entering at the bottom, 1 gone off the top
-   const p = Math.min(1, Math.max(0, .5 + (raw - .5) * SLOPE));    // centred, so mid-screen is mid-clip
+   const slope = +v.dataset.slope || SLOPE;                           // a long clip like the Annexe walk gets its own, much lower slope
+   const p = Math.min(1, Math.max(0, .5 + (raw - .5) * slope));    // centred, so mid-screen is mid-clip
    const target = p * (v.duration - .08);
    let cur = eased.has(v) ? eased.get(v) : target;
    cur += (target - cur) * (instant ? 1 : EASE);
