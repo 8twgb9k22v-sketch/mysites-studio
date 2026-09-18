@@ -198,3 +198,6 @@ dialog{background:#101521;color:#f1f4fb}
 .brand-ident video,.brand-studies .brand-ident video,.play-intro .brand-ident video{object-fit:cover;width:100%;height:100%}
 
 /* v42: brand films back to an equal pair. Montage keeps its 90 percent speed. */
+
+/* v43: film panels match the section black so no panel edge shows. */
+.brand-ident{background:#05070c}
