@@ -192,3 +192,7 @@ dialog{background:#101521;color:#f1f4fb}
 .play-intro .brand-ident{grid-area:f;aspect-ratio:4/5;height:auto;margin:0;justify-self:end;width:100%}
 .play-intro .brand-ident video{width:100%;height:100%;object-fit:contain}
 @media(max-width:700px){.play-intro{grid-template-columns:1fr;grid-template-areas:"h" "p" "f";row-gap:24px}.play-intro .brand-ident{justify-self:stretch}}
+
+/* v40: brand films fill their panels edge to edge, no rounded corners. */
+.brand-ident{border-radius:0}
+.brand-ident video,.brand-studies .brand-ident video,.play-intro .brand-ident video{object-fit:cover;width:100%;height:100%}
