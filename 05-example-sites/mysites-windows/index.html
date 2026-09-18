@@ -20,7 +20,8 @@ body{font-family:"Helvetica Neue",Arial,sans-serif;background:var(--ink);min-hei
 .col{position:absolute;left:0;right:0;top:0;will-change:transform}
 .line{height:100vh;height:100svh;display:flex;align-items:center;justify-content:center;font-family:"Anton",Impact,"Arial Narrow Bold",sans-serif;font-size:118svh;line-height:1;color:#fff;white-space:nowrap;letter-spacing:-.02em;will-change:transform}
 .line span{display:inline-block;transform-origin:center;will-change:transform}
-.win{position:fixed;left:0;top:0;width:min(240px,42vw);aspect-ratio:1.12;border:4px solid var(--b);background:var(--bg);z-index:2;overflow:hidden;will-change:transform;box-shadow:0 0 0 1px #000}
+.win{position:fixed;left:0;top:0;width:min(240px,42vw);aspect-ratio:1.12;border:4px solid var(--b);background:var(--bg);z-index:2;overflow:hidden;will-change:transform;box-shadow:0 0 0 1px #000;cursor:pointer}
+.win:hover{box-shadow:0 0 0 1px #000,0 18px 40px -10px rgb(0 0 0 / .8)}
 .win .bar{position:absolute;left:8px;right:8px;bottom:8px;height:15px;background:var(--b);color:#000;font-size:9px;font-weight:800;letter-spacing:.02em;text-transform:uppercase;padding:3px 6px;line-height:1;white-space:nowrap;overflow:hidden;z-index:2}
 .win .stage{position:absolute;inset:0 0 30px;overflow:hidden}
 .item{position:absolute;will-change:transform}
@@ -128,7 +129,8 @@ Share share</span>
       stage.append(node);
       return { node, ph: i * 1.7 + wi, rot: ((i * 47) % 60) - 30, sp: .4 + (i % 3) * .25 };
     });
-    return { el, x: +el.dataset.x, y: +el.dataset.y, d: +el.dataset.d, ph: wi * 1.3, items };
+    el.addEventListener('pointerenter', () => { el.style.zIndex = 5; }); el.addEventListener('pointerleave', () => { el.style.zIndex = 2; });
+    return { el, x: +el.dataset.x, y: +el.dataset.y, d: +el.dataset.d, ph: wi * 1.3, items, rx: 0, ry: 0 };
   });
 
   let mx = 0, my = 0, tx = 0, ty = 0, t0 = performance.now();
@@ -136,13 +138,13 @@ Share share</span>
 
   function frame(now) {
     const t = (now - t0) / 1000;
-    mx += (tx - mx) * .06; my += (ty - my) * .06;
+    mx += (tx - mx) * .1; my += (ty - my) * .1;
 
     // Wall of type: scroll drives it, time keeps it creeping so it never sits still.
     const total = lineH * COUNT;
     const drift = reduce ? 0 : t * 28;
     let off = (scrollY * 1.15 + drift) % total;
-    col.style.transform = `translate3d(0, ${(-off).toFixed(2)}px, 0)`;
+    col.style.transform = `translate3d(${(reduce ? 0 : -mx * 90).toFixed(1)}px, ${(-off + (reduce ? 0 : -my * 40)).toFixed(2)}px, 0)`;
     for (let i = 0; i < lines.length; i++) {
       const s = lines[i].firstChild;
       const centre = i * lineH - off + lineH / 2;         // line centre in viewport px
@@ -155,12 +157,20 @@ Share share</span>
     for (const w of wins) {
       const wx = reduce ? 0 : Math.sin(t * .23 + w.ph) * 26 + Math.sin(t * .11 + w.ph * 2) * 14;
       const wy = reduce ? 0 : Math.cos(t * .19 + w.ph) * 22 + Math.cos(t * .07 + w.ph) * 10;
-      const px = -mx * 60 * w.d, py = -my * 44 * w.d;
+      const px = -mx * 150 * w.d, py = -my * 110 * w.d;
       const hx = w.x / 100 * (vw - w.el.offsetWidth), hy = w.y / 100 * (vh - w.el.offsetHeight);   // home spot stays inside the viewport
-      w.el.style.transform = `translate3d(${(hx + wx + px).toFixed(1)}px, ${(hy + wy + py).toFixed(1)}px, 0)`;
+      // Repulsion: a window near the cursor gets shoved away, eased back when the cursor leaves.
+      const cw = w.el.offsetWidth, ch = w.el.offsetHeight;
+      const cx = hx + wx + px + cw / 2, cy = hy + wy + py + ch / 2;
+      const dx = cx - (mx + .5) * vw, dy = cy - (my + .5) * vh;
+      const dist = Math.hypot(dx, dy) || 1, R = Math.max(cw, ch) * 1.1;
+      const push = reduce ? 0 : Math.max(0, (R - dist) / R) * 120;
+      w.rx += ((dx / dist) * push - w.rx) * .12; w.ry += ((dy / dist) * push - w.ry) * .12;
+      const lift = w.el.matches(':hover') ? 1.05 : 1;
+      w.el.style.transform = `translate3d(${(hx + wx + px + w.rx).toFixed(1)}px, ${(hy + wy + py + w.ry).toFixed(1)}px, 0) scale(${lift})`;
       for (const it of w.items) {
-        const ix = reduce ? 0 : Math.sin(t * it.sp + it.ph) * 18 + mx * 30 * w.d;
-        const iy = reduce ? 0 : Math.cos(t * it.sp * .8 + it.ph) * 14 + my * 22 * w.d;
+        const ix = reduce ? 0 : Math.sin(t * it.sp + it.ph) * 18 + mx * 70 * w.d;
+        const iy = reduce ? 0 : Math.cos(t * it.sp * .8 + it.ph) * 14 + my * 52 * w.d;
         const r = reduce ? it.rot : it.rot + Math.sin(t * .5 + it.ph) * 12;
         it.node.style.transform = `translate3d(${ix.toFixed(1)}px, ${iy.toFixed(1)}px, 0) rotate(${r.toFixed(1)}deg)`;
       }
