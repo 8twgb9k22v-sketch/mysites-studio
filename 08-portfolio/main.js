@@ -86,16 +86,23 @@ for(const study of document.querySelectorAll('.brand-ident')){
   }
  }, { rootMargin: '25% 0px' });
  for (const v of document.querySelectorAll('.project video.preview')) io.observe(v);
- function update() {
+ const SLOPE = .55;   // how much of the clip one pass through the viewport covers (1 = all of it)
+ const EASE = .07;    // per-frame catch-up toward the target frame; lower is smoother and lazier
+ const eased = new WeakMap();
+ function update(instant) {
   const vh = innerHeight;
   for (const v of live) {
    if (!v.duration || v.seeking) continue;
    const r = v.getBoundingClientRect();
-   const p = Math.min(1, Math.max(0, 1 - (r.top + r.height) / (vh + r.height)));
-   const t = p * (v.duration - .08);
-   if (Math.abs(v.currentTime - t) > .06) v.currentTime = t;
+   const raw = 1 - (r.top + r.height) / (vh + r.height);          // 0 entering at the bottom, 1 gone off the top
+   const p = Math.min(1, Math.max(0, .5 + (raw - .5) * SLOPE));    // centred, so mid-screen is mid-clip
+   const target = p * (v.duration - .08);
+   let cur = eased.has(v) ? eased.get(v) : target;
+   cur += (target - cur) * (instant ? 1 : EASE);
+   eased.set(v, cur);
+   if (Math.abs(v.currentTime - cur) > .025) v.currentTime = cur;
   }
  }
- addEventListener('scroll', update, { passive: true });
- (function tick() { update(); requestAnimationFrame(tick); })();
+ addEventListener('scroll', () => update(false), { passive: true });
+ (function tick() { update(false); requestAnimationFrame(tick); })();
 })();
