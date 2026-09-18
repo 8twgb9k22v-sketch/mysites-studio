@@ -184,3 +184,8 @@ dialog{background:#101521;color:#f1f4fb}
 
 /* v37: home-page previews are scroll-scrubbed clips of each site. */
 .project-visual video{display:block;width:100%;height:auto;background:var(--project-bg,#090b12)}
+
+/* v38: blue-frames film stacked above the chrome montage; the monochrome ident stretches to match the stack. */
+.brand-stack{display:grid;gap:24px;min-width:0}
+.brand-studies>figure.brand-ident{aspect-ratio:auto;align-self:stretch;min-height:0}
+@media(max-width:700px){.brand-studies>figure.brand-ident{aspect-ratio:4/5}}
